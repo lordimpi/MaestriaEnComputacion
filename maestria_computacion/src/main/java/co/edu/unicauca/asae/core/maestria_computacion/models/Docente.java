@@ -1,14 +1,12 @@
 package co.edu.unicauca.asae.core.maestria_computacion.models;
 
+import java.util.List;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import jakarta.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter

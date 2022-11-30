@@ -1,7 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 

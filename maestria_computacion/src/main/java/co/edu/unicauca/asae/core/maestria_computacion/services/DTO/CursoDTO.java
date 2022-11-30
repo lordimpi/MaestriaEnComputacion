@@ -13,9 +13,7 @@ import lombok.Setter;
 public class CursoDTO {
     
     private int id;
-
     private String nombre;
-
     private int periodo;
 
     private Asignatura objAsignatura;
