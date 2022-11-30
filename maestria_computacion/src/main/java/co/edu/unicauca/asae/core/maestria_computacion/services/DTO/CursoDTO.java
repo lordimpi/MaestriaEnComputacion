@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.DTO;
 
+import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class CursoDTO {
 
     private int periodo;
 
-    private AsignaturaDTO objAsignatura;
+    private Asignatura objAsignatura;
 }

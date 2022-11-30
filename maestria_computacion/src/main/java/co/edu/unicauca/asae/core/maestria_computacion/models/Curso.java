@@ -1,5 +1,8 @@
 package co.edu.unicauca.asae.core.maestria_computacion.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -25,7 +28,8 @@ public class Curso {
     @Column(nullable = false)
     private Integer periodo;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_asignatura",nullable = false)
+    @JsonIgnore
     private Asignatura objAsignatura;
 }

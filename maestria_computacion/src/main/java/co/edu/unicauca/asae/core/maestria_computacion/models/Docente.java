@@ -27,14 +27,8 @@ public class Docente extends Persona{
     private float salario;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(
-            name = "docentes_asignaturas",
-            joinColumns = @JoinColumn(name = "id_persona"),
-            inverseJoinColumns = @JoinColumn(name = "id_asignatura"))
-    // @ManyToMany(fetch = FetchType.EAGER)
-    // @JoinTable(name = "docentes_asignaturas", 
-    //     joinColumns = @JoinColumn(name = "id_asignatura"), 
-    //     inverseJoinColumns = @JoinColumn(name = "id_persona"))
+    @JoinTable(name = "docentes_asignaturas", 
+        joinColumns = @JoinColumn(name = "id_persona"), 
+        inverseJoinColumns = @JoinColumn(name = "id_asignatura"))
     private List<Asignatura> asignaturas;
 }

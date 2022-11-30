@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -25,9 +27,12 @@ public class Asignatura {
     @Column(nullable = false)
     private String nombre;
 
-    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY, mappedBy = "objAsignatura")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAsignatura", cascade = CascadeType.ALL)
     private List<Curso> cursos;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "asignaturas")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "docentes_asignaturas", 
+        joinColumns = @JoinColumn(name = "id_asignatura"), 
+        inverseJoinColumns = @JoinColumn(name = "id_persona"))
     private List<Docente> docentes;
 }

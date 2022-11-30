@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.AsignaturaRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.CursoRepository;
+import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.CursoDTO;
 
 
@@ -23,22 +24,29 @@ public class CursoServiceImpl implements ICursoService {
     private CursoRepository cursoRepository;
 
     @Autowired
-    private AsignaturaRepository asignaturaRepository;
-
-    @Autowired
     @Qualifier("curso")
     private ModelMapper modelMapper;
 
     @Override
+    @Transactional(readOnly = true)
+    public List<CursoDTO> getAllCursos() {
+        modelMapper.getConfiguration().setPreferNestedProperties(false);
+        System.out.println("Invocando a listar cursos");
+        Iterable<Curso> cursos = cursoRepository.findAll();
+        List<CursoDTO> cursosDTO = modelMapper.map(cursos, new TypeToken<List<CursoDTO>>() {
+        }.getType());
+        return cursosDTO;
+    }
+    @Override
+    
     @Transactional()
     public CursoDTO createCurso(CursoDTO curso) {
         System.out.println("Invocando al metodo crear curso");
         Curso objCurso = modelMapper.map(curso, Curso.class);
         CursoDTO cursoDTO = null;
         Curso cursoAlmacenado = cursoRepository.save(objCurso);
-         
-        cursoDTO = modelMapper.map(cursoAlmacenado, CursoDTO.class);
 
+        cursoDTO = modelMapper.map(cursoAlmacenado, CursoDTO.class);
         return cursoDTO;
     }
 
@@ -50,7 +58,7 @@ public class CursoServiceImpl implements ICursoService {
         CursoDTO cursoDTO = modelMapper.map(curso, CursoDTO.class);
         return cursoDTO;
     }
-
+    
     @Override
     @Transactional(readOnly = false)
     public CursoDTO updateCurso(Integer id, CursoDTO curso) {
@@ -81,14 +89,5 @@ public class CursoServiceImpl implements ICursoService {
         return result;
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<CursoDTO> getAllCursos() {
-        System.out.println("Invocando a listar cursos");
-        Iterable<Curso> cursos = cursoRepository.findAll();
-        List<CursoDTO> cursosDTO = modelMapper.map(cursos, new TypeToken<List<CursoDTO>>() {
-        }.getType());
-        return cursosDTO;
-    }
 
 }

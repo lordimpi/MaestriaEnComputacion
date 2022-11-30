@@ -2,6 +2,8 @@ package co.edu.unicauca.asae.core.maestria_computacion.services.DTO;
 
 import java.util.List;
 
+import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
+import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,6 @@ public class AsignaturaDTO {
     private Integer id;
     private String nombre;
 
-    private List<CursoDTO> cursos;
-    private List<DocenteDTO> docentes;
+    private List<Curso> cursos;
+    private List<Docente> docentes;
 }
