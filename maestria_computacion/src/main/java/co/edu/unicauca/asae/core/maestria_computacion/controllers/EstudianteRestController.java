@@ -29,6 +29,13 @@ public class EstudianteRestController {
         return estudianteService.getEstudianteById(id);
     }
 
+    @PostMapping("/estudiantes")
+    public EstudianteDTO create(@RequestBody EstudianteDTO estudiante){
+        EstudianteDTO objEstudiante = null;
+        objEstudiante = estudianteService.createEstudiante(estudiante);
+        return objEstudiante;
+    }
+
     @DeleteMapping("/estudiantes/{id}")
     public Boolean delete(@PathVariable Integer id){
         Boolean bandera=false;
