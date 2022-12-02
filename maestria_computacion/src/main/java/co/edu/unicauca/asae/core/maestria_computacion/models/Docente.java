@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "docente")
+@Table(name = "docentes")
 public class Docente extends Persona{
     @Column(nullable = false)
     private String universidad;

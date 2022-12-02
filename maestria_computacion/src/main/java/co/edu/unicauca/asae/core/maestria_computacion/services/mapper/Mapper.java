@@ -27,7 +27,29 @@ public class Mapper {
     @Bean(name = "curso")
     public ModelMapper cursoMapper(){
         ModelMapper objMapper = new ModelMapper();
-        // TypeMap<Curso,CursoDTO> mapa = objMapper.emptyTypeMap(Curso.class, CursoDTO.class);
+        //TypeMap<Curso,CursoDTO> mapa = objMapper.emptyTypeMap(Curso.class, CursoDTO.class);
+        // mapa.addMappings(c -> c.skip(CursoDTO::setId)).implicitMappings();
+        // mapa.addMappings(c -> c.skip(CursoDTO::setNombre)).implicitMappings();
+        // mapa.addMappings(c -> c.skip(CursoDTO::setPeriodo)).implicitMappings();
+        //mapa.addMappings(c -> c.skip(CursoDTO::setObjAsignatura)).implicitMappings();
+        return objMapper;
+    } 
+
+    @Bean(name = "estudiante")
+    public ModelMapper estudianteMapper(){
+        ModelMapper objMapper = new ModelMapper();
+        //TypeMap<Curso,CursoDTO> mapa = objMapper.emptyTypeMap(Curso.class, CursoDTO.class);
+        // mapa.addMappings(c -> c.skip(CursoDTO::setId)).implicitMappings();
+        // mapa.addMappings(c -> c.skip(CursoDTO::setNombre)).implicitMappings();
+        // mapa.addMappings(c -> c.skip(CursoDTO::setPeriodo)).implicitMappings();
+        // mapa.addMappings(c -> c.skip(CursoDTO::setObjAsignaturaDTO)).implicitMappings();
+        return objMapper;
+    } 
+
+    @Bean(name = "direccion")
+    public ModelMapper direccionMapper(){
+        ModelMapper objMapper = new ModelMapper();
+        //TypeMap<Curso,CursoDTO> mapa = objMapper.emptyTypeMap(Curso.class, CursoDTO.class);
         // mapa.addMappings(c -> c.skip(CursoDTO::setId)).implicitMappings();
         // mapa.addMappings(c -> c.skip(CursoDTO::setNombre)).implicitMappings();
         // mapa.addMappings(c -> c.skip(CursoDTO::setPeriodo)).implicitMappings();
