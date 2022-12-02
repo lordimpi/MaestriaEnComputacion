@@ -1,5 +1,7 @@
 package co.edu.unicauca.asae.core.maestria_computacion.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Table(name = "direcciones")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Direccion {
-    @Id  
+    @Id      
     private Integer idDireccion;
     @Column(nullable=false,length = 30)
     private String direccionResidencia;
@@ -26,6 +28,7 @@ public class Direccion {
     private String pais;
     
     @MapsId
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "idDireccion", nullable = false)
     private Estudiante objEstudiante; 
