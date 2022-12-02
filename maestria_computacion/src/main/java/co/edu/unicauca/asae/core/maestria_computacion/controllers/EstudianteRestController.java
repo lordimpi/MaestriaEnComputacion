@@ -24,10 +24,6 @@ public class EstudianteRestController {
     @Autowired
     private IEstudianteService estudianteService;
 
-    @GetMapping("/estudiantes/{id}")
-    public EstudianteDTO show(@PathVariable Integer id){
-        return estudianteService.getEstudianteById(id);
-    }
 
     @PostMapping("/estudiantes")
     public EstudianteDTO create(@RequestBody EstudianteDTO estudiante){
