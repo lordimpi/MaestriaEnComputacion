@@ -24,11 +24,6 @@ public class EstudianteRestController {
     @Autowired
     private IEstudianteService estudianteService;
 
-    @GetMapping("/estudiantes/{id}")
-    public EstudianteDTO show(@PathVariable Integer id){
-        return estudianteService.getEstudianteById(id);
-    }
-
     @DeleteMapping("/estudiantes/{id}")
     public Boolean delete(@PathVariable Integer id){
         Boolean bandera=false;
@@ -37,5 +32,25 @@ public class EstudianteRestController {
             bandera = estudianteService.deleteEstudiante(id);
         }
         return bandera;
+    }
+
+     @GetMapping("/estudiantes")
+    public List<EstudianteDTO> index(){
+        return estudianteService.getAllEstudiante();
+    }
+
+    @GetMapping("/estudiantes/{id}")
+    public EstudianteDTO show(@PathVariable Integer id){
+        return estudianteService.getById(id);
+    }
+
+    @GetMapping("/estudiantes/lazy")
+    public List<EstudianteDTO> indexLazy(){
+        return estudianteService.getAllLazy();
+    }
+
+    @GetMapping("/estudiantes/lazy/{id}")
+    public EstudianteDTO showLazy(@PathVariable Integer id){
+        return estudianteService.getByIdLazy(id);
     }
 }
