@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
-import co.edu.unicauca.asae.core.maestria_computacion.repositories.AsignaturaRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.CursoRepository;
-import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.CursoDTO;
 
 
@@ -45,7 +43,6 @@ public class CursoServiceImpl implements ICursoService {
         Curso objCurso = modelMapper.map(curso, Curso.class);
         CursoDTO cursoDTO = null;
         Curso cursoAlmacenado = cursoRepository.save(objCurso);
-
         cursoDTO = modelMapper.map(cursoAlmacenado, CursoDTO.class);
         return cursoDTO;
     }

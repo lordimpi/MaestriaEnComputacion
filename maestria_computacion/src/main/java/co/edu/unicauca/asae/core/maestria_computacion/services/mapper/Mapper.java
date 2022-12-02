@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
+import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.CursoDTO;
+import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.DocenteDTO;
 
 @Configuration
 public class Mapper {
@@ -55,5 +57,22 @@ public class Mapper {
         // mapa.addMappings(c -> c.skip(CursoDTO::setPeriodo)).implicitMappings();
         // mapa.addMappings(c -> c.skip(CursoDTO::setObjAsignaturaDTO)).implicitMappings();
         return objMapper;
-    } 
+    }
+
+    @Bean(name = "docente")
+    public ModelMapper docenentMapper(){
+        ModelMapper objMapper = new ModelMapper();
+        TypeMap<Docente,DocenteDTO> mapa = objMapper.emptyTypeMap(
+            Docente.class, DocenteDTO.class);
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setId)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setApellidos)).implicitMappings();
+        mapa.addMappings(doc -> doc.skip(DocenteDTO::setAsignaturas)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setNoId)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setNombres)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setSalario)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setTipoDocente)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setTipoIdentificacion)).implicitMappings();
+        // mapa.addMappings(doc -> doc.skip(DocenteDTO::setUniversidad)).implicitMappings();
+    return objMapper;
+    }
 }

@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +30,8 @@ public class Asignatura {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAsignatura", cascade = CascadeType.ALL)
     private List<Curso> cursos;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "docentes_asignaturas", 
         joinColumns = @JoinColumn(name = "id_asignatura"), 
         inverseJoinColumns = @JoinColumn(name = "id_persona"))

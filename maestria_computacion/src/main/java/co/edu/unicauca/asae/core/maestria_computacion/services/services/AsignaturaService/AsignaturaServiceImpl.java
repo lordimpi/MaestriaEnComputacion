@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.AsignaturaService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -28,9 +29,13 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     @Override
     @Transactional()
     public AsignaturaDTO createAsignatura(AsignaturaDTO asignatura) {
+        System.out.println("Invocando al metodo crear asignatura");
         Asignatura objAsignatura = modelMapper.map(asignatura, Asignatura.class);
         objAsignatura.getCursos().forEach(c -> c.setObjAsignatura(objAsignatura));
-        objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));
+        for (var item : objAsignatura.getDocentes()) {
+            item.setAsignaturas(new ArrayList<Asignatura>());
+            item.getAsignaturas().add(objAsignatura);
+        }
         Asignatura asignatura2 = asignaturaRepository.save(objAsignatura);
         return modelMapper.map(asignatura2, AsignaturaDTO.class);
     }
@@ -48,6 +53,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
 
     @Override
     public AsignaturaDTO getAsignaturaById(Integer id) {
+        System.out.println("Invocando al metodo buscar asignatura por id");
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
         AsignaturaDTO asignaturaDTO = modelMapper.map(asignatura, AsignaturaDTO.class);
         return asignaturaDTO;
@@ -55,6 +61,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
 
     @Override
     public AsignaturaDTO updateAsignatura(Integer id, AsignaturaDTO asignatura) {
+        System.out.println("Invocando al metodo actualizar asignatura");
         Asignatura objAsignatura = asignaturaRepository.findById(id).orElse(null);
         AsignaturaDTO asignaturaDTO = null;
 
@@ -77,6 +84,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
 
     @Override
     public boolean deleteAsignatura(Integer id) {
+        System.out.println("Invocando al metodo eliminar asignatura");
         boolean result = false;
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
         if (asignatura != null) {
