@@ -25,7 +25,6 @@ public class Estudiante extends Persona {
     @Column(nullable = false)
     private Date fechaIngreso;
     
-
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objEstudiante") //lazy
     //@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objEstudiante") //eager
     private Direccion objDireccion;  

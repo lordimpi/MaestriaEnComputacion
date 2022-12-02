@@ -10,7 +10,7 @@ public interface IEstudianteService {
 
     public EstudianteDTO getEstudianteById(Integer id);
 
-    public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudiante);
+    public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudianteConDatosNuevos);
 
     public boolean deleteEstudiante(Integer id);
     

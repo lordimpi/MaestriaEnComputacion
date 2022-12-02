@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class EstudianteDTO extends PersonaDTO{
+public class EstudianteDTO extends PersonaDTO {
     private Date fechaIngreso;
 
     private List<TelefonoDTO> telefonos;

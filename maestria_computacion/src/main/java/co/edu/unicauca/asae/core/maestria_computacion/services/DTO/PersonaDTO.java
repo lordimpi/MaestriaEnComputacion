@@ -11,6 +11,8 @@ public class PersonaDTO {
 
     private String noId;
 
+    private String tipoIdentificacion;
+
     private String nombres;
 
     private String apellidos;    

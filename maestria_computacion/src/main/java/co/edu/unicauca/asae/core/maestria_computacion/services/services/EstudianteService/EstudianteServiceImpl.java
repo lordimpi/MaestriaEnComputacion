@@ -35,8 +35,15 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Override
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante) {
-        // TODO Auto-generated method stub
-        return null;
+        EstudianteDTO  estudianteDTO = null;
+        
+            System.out.println("invocando al metodo crear estudiante");
+            Estudiante objEstudiante = this.modelMapper.map(estudiante,Estudiante.class);
+            objEstudiante.getObjDireccion().setObjEstudiante(objEstudiante);
+            Estudiante estudianteEntity = this.estudianteRepository.save(objEstudiante);
+            estudianteDTO = this.modelMapper.map(estudianteEntity, EstudianteDTO.class);
+              
+        return estudianteDTO;
     }
 
     @Override
@@ -69,8 +76,8 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
-    public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudiante) {
-        // TODO Auto-generated method stub
+    public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudianteConDatosNuevos) {
+        
         return null;
     }
     
