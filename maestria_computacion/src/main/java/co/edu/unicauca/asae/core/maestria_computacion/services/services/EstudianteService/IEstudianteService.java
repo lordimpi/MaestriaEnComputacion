@@ -13,7 +13,13 @@ public interface IEstudianteService {
     public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudianteConDatosNuevos);
 
     public boolean deleteEstudiante(Integer id);
+    
+    public EstudianteDTO getById(Integer id);
 
     public List<EstudianteDTO> getAllEstudiante();
+
+    public List<EstudianteDTO> getAllLazy();
+
+    public EstudianteDTO getByIdLazy(Integer id);
     
 }

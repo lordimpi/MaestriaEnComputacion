@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Setter @Getter @AllArgsConstructor @NoArgsConstructor
 public class PersonaDTO {
     private int id;
 

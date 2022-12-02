@@ -7,11 +7,10 @@ import lombok.Setter;
 
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
 public class TelefonoDTO {
-    
+
     private int id;
 
     private String tipo;
 
     private String numero;
-    
 }

@@ -25,10 +25,12 @@ public class Estudiante extends Persona {
     @Column(nullable = false)
     private Date fechaIngreso;
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")
-    private Direccion objDireccion;
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objEstudiante") //lazy
+    //@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objEstudiante") //eager
+    private Direccion objDireccion;  
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")
+    //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "estudiante") //eager
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "estudiante") //lazy
     private List<Telefono> telefonos;
     
 }

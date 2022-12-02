@@ -25,5 +25,6 @@ public class Telefono {
 
     @ManyToOne
     @JoinColumn(name = "id_persona")
-    private Estudiante objEstudiante;
+    private Estudiante estudiante;
+   
 }
