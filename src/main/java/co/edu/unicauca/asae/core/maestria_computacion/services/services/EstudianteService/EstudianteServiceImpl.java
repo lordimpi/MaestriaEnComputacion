@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -85,8 +86,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
 			Direccion objDireccionAlmacenada = objEstudianteAlmacenado.getObjDireccion();
 			objDireccionAlmacenada.setDireccionResidencia(estudianteConDatosNuevos.getObjDireccion().getDireccionResidencia());
 			objDireccionAlmacenada.setCiudad(estudianteConDatosNuevos.getObjDireccion().getCiudad());
-			objDireccionAlmacenada.setPais(estudianteConDatosNuevos.getObjDireccion().getPais());		    
-            
+			objDireccionAlmacenada.setPais(estudianteConDatosNuevos.getObjDireccion().getPais());
+
+            List<Telefono> Telefonos = modelMapper.map(estudianteConDatosNuevos.getTelefonos(), new TypeToken<List<Telefono>>() {
+            }.getType());
+            objEstudianteAlmacenado.setTelefonos(Telefonos);
+            objEstudianteAlmacenado.getTelefonos().forEach(c -> c.setObjEstudiante(objEstudianteAlmacenado));
+
 			Estudiante estudianteEntityActualizado = this.estudianteRepository.save(objEstudianteAlmacenado);
 			estudianteDTOActualizado = this.modelMapper.map(estudianteEntityActualizado, EstudianteDTO.class);
 		}
