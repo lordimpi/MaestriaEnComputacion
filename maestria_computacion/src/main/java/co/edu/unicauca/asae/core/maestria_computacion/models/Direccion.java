@@ -29,7 +29,7 @@ public class Direccion {
     
     @MapsId
     @JsonIgnore
-    @OneToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "idDireccion", nullable = false)
     private Estudiante objEstudiante; 
     

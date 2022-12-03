@@ -26,6 +26,10 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     @Qualifier("asignatura")
     private ModelMapper modelMapper;
 
+    @Autowired
+    @Qualifier("asignaturaSinCursos")
+    private ModelMapper modelMapper2;
+
     @Override
     @Transactional()
     public AsignaturaDTO createAsignatura(AsignaturaDTO asignatura) {
@@ -55,7 +59,11 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     public AsignaturaDTO getAsignaturaById(Integer id) {
         System.out.println("Invocando al metodo buscar asignatura por id");
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
-        AsignaturaDTO asignaturaDTO = modelMapper.map(asignatura, AsignaturaDTO.class);
+        if (asignatura == null) {
+            System.out.println("No exisite el asignatura con id: "+id);
+            return null;
+        }
+        AsignaturaDTO asignaturaDTO = modelMapper2.map(asignatura, AsignaturaDTO.class);
         return asignaturaDTO;
     }
 

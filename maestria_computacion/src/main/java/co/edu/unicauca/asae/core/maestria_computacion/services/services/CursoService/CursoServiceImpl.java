@@ -52,6 +52,10 @@ public class CursoServiceImpl implements ICursoService {
     public CursoDTO getCursoById(Integer id) {
         System.out.println("Invocando al metodo buscar curso por id: " + id);
         Curso curso = cursoRepository.findById(id).orElse(null);
+        if (curso == null) {
+            System.out.println("No exisite el curso con id: "+id);
+            return null;
+        }
         CursoDTO cursoDTO = modelMapper.map(curso, CursoDTO.class);
         return cursoDTO;
     }

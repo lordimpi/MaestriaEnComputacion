@@ -30,6 +30,19 @@ public class Mapper {
         return objMapper;
     }
 
+    @Bean(name = "asignaturaSinCursos")
+    public ModelMapper asignaturaSinCursosMapper() {
+        ModelMapper objMapper = new ModelMapper();
+        TypeMap<Asignatura, AsignaturaDTO> mapa = objMapper.emptyTypeMap(
+                Asignatura.class, AsignaturaDTO.class);
+        // mapa.addMappings(asg -> asg.skip(AsignaturaDTO::setId)).implicitMappings();
+        // mapa.addMappings(asg ->
+        // asg.skip(AsignaturaDTO::setNombre)).implicitMappings();
+        // mapa.addMappings(asg -> asg.skip(AsignaturaDTO::setDocentes)).implicitMappings();
+        mapa.addMappings(asg -> asg.skip(AsignaturaDTO::setCursos)).implicitMappings();
+        return objMapper;
+    }
+
     @Bean(name = "curso")
     public ModelMapper cursoMapper() {
         ModelMapper objMapper = new ModelMapper();

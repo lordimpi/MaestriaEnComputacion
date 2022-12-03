@@ -61,6 +61,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<EstudianteDTO> getAllEstudiante() {
         System.out.println("Invocando al metodo obtener todos los estudiantes");
         Iterable<Estudiante> estudiante = this.estudianteRepository.findAll();
@@ -71,8 +72,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EstudianteDTO getEstudianteById(Integer id) {
         Estudiante estudiante = estudianteRepository.findById(id).orElse(null);
+        if (estudiante == null) {
+            System.out.println("No exisite el estudiante con id: "+id);
+            return null;
+        }
         EstudianteDTO estudianteDTO = modelMapper.map(estudiante, EstudianteDTO.class);
         return estudianteDTO;
     }
@@ -108,6 +114,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<EstudianteDTO> getAllLazy(){
         Iterable<Estudiante> estudiantes = estudianteRepository.findAll();
         List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes, new TypeToken<List<EstudianteDTO>>(){}.getType());
@@ -115,8 +122,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EstudianteDTO getByIdLazy(Integer id){
         Optional<Estudiante> estudiante = estudianteRepository.findById(id);
+        if (estudiante == null) {
+            System.out.println("No exisite el estudiante con id: "+id);
+            return null;
+        }
         EstudianteDTO estudianteDTO = mapperLazy.map(estudiante.get(), EstudianteDTO.class);
         return estudianteDTO;
     }

@@ -28,9 +28,10 @@ public class Estudiante extends Persona {
     private Date fechaIngreso;
     
     @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")
+    @OneToOne(optional = false,fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")
     private Direccion objDireccion;
     
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")
     private List<Telefono> telefonos;
     

@@ -12,6 +12,6 @@ public class DireccionDTO {
     private String ciudad;
     private String pais;
     
-    private EstudianteDTO objEstudiante;
+    // private EstudianteDTO objEstudiante;
     
 }
