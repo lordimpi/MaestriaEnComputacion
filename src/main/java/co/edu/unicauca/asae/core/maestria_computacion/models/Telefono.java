@@ -3,6 +3,8 @@ package co.edu.unicauca.asae.core.maestria_computacion.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 
@@ -23,8 +25,8 @@ public class Telefono {
     @Column(nullable = false)
     private String numero;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "id_persona")
-    private Estudiante estudiante;
-   
+    private Estudiante objEstudiante;
 }

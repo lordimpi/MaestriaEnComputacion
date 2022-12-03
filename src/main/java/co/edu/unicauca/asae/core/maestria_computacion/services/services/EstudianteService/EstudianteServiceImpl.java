@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
+import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.EstudianteRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
@@ -25,14 +26,6 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Qualifier("estudiante")
     private ModelMapper modelMapper;
 
-    @Autowired
-    @Qualifier("estudianteLazy")
-    private ModelMapper mapperLazy;
-
-    @Autowired
-    @Qualifier("estudianteEager")
-    private ModelMapper mapperEager;
-
     @Override
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante) {
         EstudianteDTO  estudianteDTO = null;
@@ -40,9 +33,10 @@ public class EstudianteServiceImpl implements IEstudianteService {
             System.out.println("invocando al metodo crear estudiante");
             Estudiante objEstudiante = this.modelMapper.map(estudiante,Estudiante.class);
             objEstudiante.getObjDireccion().setObjEstudiante(objEstudiante);
+            objEstudiante.getTelefonos().forEach(telefono -> telefono.setObjEstudiante(objEstudiante));
             Estudiante estudianteEntity = this.estudianteRepository.save(objEstudiante);
             estudianteDTO = this.modelMapper.map(estudianteEntity, EstudianteDTO.class);
-              
+            System.out.println("Estudiante Creado!");  
         return estudianteDTO;
     }
 
@@ -65,44 +59,44 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
-    public EstudianteDTO getEstudianteById(Integer id) {
-        Optional<Estudiante> estudiante = estudianteRepository.findById(id);     
-        EstudianteDTO estudianteDTO = modelMapper.map(estudiante, EstudianteDTO.class);
-        return estudianteDTO;
-        /*Optional<Estudiante> estudiante = estudianteRepository.findById(id);
-        System.out.println(estudiante.get().getNombres());
-        EstudianteDTO estudianteDTO = mapperEager.map(estudiante, EstudianteDTO.class);
-        return estudianteDTO;*/
-    }
-
-    @Override
-    public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudianteConDatosNuevos) {
-        
+    public List<EstudianteDTO> getAllEstudiante() {
+        // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public EstudianteDTO getEstudianteById(Integer id) {
+        Optional<Estudiante> estudiante = estudianteRepository.findById(id);        
+        EstudianteDTO estudianteDTO = modelMapper.map(estudiante, EstudianteDTO.class);
+        return estudianteDTO;
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudianteConDatosNuevos) {
+        Optional<Estudiante> optional = this.estudianteRepository.findById(id);
+		EstudianteDTO estudianteDTOActualizado = null;
+		Estudiante objEstudianteAlmacenado = optional.get();
+        if (objEstudianteAlmacenado != null) {			
+			objEstudianteAlmacenado.setNombres(estudianteConDatosNuevos.getNombres());
+			objEstudianteAlmacenado.setApellidos(estudianteConDatosNuevos.getApellidos());
+			objEstudianteAlmacenado.setNoId(estudianteConDatosNuevos.getNoId());
+            objEstudianteAlmacenado.setTipoIdentificacion(estudianteConDatosNuevos.getTipoIdentificacion());
+			Direccion objDireccionAlmacenada = objEstudianteAlmacenado.getObjDireccion();
+			objDireccionAlmacenada.setDireccionResidencia(estudianteConDatosNuevos.getObjDireccion().getDireccionResidencia());
+			objDireccionAlmacenada.setCiudad(estudianteConDatosNuevos.getObjDireccion().getCiudad());
+			objDireccionAlmacenada.setPais(estudianteConDatosNuevos.getObjDireccion().getPais());		    
+            
+			Estudiante estudianteEntityActualizado = this.estudianteRepository.save(objEstudianteAlmacenado);
+			estudianteDTOActualizado = this.modelMapper.map(estudianteEntityActualizado, EstudianteDTO.class);
+		}
+        else
+        {
+            System.out.println("Error Fatal: Estudiante No encontrado");
+        }
+
+
+        return estudianteDTOActualizado;
+    }
     
-    @Override
-    public List<EstudianteDTO> getAllEstudiante(){
-        Iterable<Estudiante> estudiantes = estudianteRepository.findAll();
-        List<EstudianteDTO> estudiantesDTO = mapperEager.map(estudiantes, new TypeToken<List<EstudianteDTO>>(){}.getType());
-        return estudiantesDTO;
-    }
-
-    @Override
-    public EstudianteDTO getById(Integer id){
-        Optional<Estudiante> estudiante = estudianteRepository.findById(id);
-        EstudianteDTO estudianteDTO = mapperEager.map(estudiante.get(),EstudianteDTO.class);
-        return estudianteDTO;
-    }
-
-    public List<EstudianteDTO> getAllLazy(){
-        Iterable<Estudiante> estudiantes = estudianteRepository.findAll();
-        List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes, new TypeToken<List<EstudianteDTO>>(){}.getType());
-        return estudiantesDTO;
-    }
-    public EstudianteDTO getByIdLazy(Integer id){
-        Optional<Estudiante> estudiante = estudianteRepository.findById(id);
-        EstudianteDTO estudianteDTO = mapperLazy.map(estudiante.get(), EstudianteDTO.class);
-        return estudianteDTO;
-    }
 }

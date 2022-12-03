@@ -8,11 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
-import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.CursoDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.DocenteDTO;
-import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
 @Configuration
 public class Mapper {
@@ -76,21 +74,5 @@ public class Mapper {
         // mapa.addMappings(doc -> doc.skip(DocenteDTO::setTipoIdentificacion)).implicitMappings();
         // mapa.addMappings(doc -> doc.skip(DocenteDTO::setUniversidad)).implicitMappings();
     return objMapper;
-    }
-
-    @Bean(name="estudianteEager")
-    public ModelMapper modelMapperEstudiante(){
-        ModelMapper objMapper = new ModelMapper();
-        TypeMap<Estudiante, EstudianteDTO> mapa = objMapper.getTypeMap(Estudiante.class, EstudianteDTO.class);
-        return objMapper;
-    }
-    
-    @Bean(name="estudianteLazy")
-    public ModelMapper modelMapperEstudianteLazy(){
-        ModelMapper objMapper = new ModelMapper();
-        TypeMap<Estudiante, EstudianteDTO> mapa = objMapper.emptyTypeMap(Estudiante.class, EstudianteDTO.class);
-        mapa.addMappings(asg -> asg.skip(EstudianteDTO::setDireccion)).implicitMappings();
-        mapa.addMappings(asg -> asg.skip(EstudianteDTO::setTelefonos)).implicitMappings();
-        return objMapper;
     }
 }

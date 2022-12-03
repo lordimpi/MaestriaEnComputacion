@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
-public class DireccionDTO {
-    private Integer idDireccion;
-    private String direccionResidencia;
-    private String ciudad;
-    private String pais;
+public class TelefonoDTO {
     
-    //private EstudianteDTO objEstudiante;
+    private int id;
+
+    private String tipo;
+
+    private String numero;
     
 }
