@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -57,13 +58,16 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Override
     public List<EstudianteDTO> getAllEstudiante() {
-        // TODO Auto-generated method stub
-        return null;
+        System.out.println("Invocando al metodo obtener todos los estudiantes");
+        Iterable<Estudiante> estudiante = this.estudianteRepository.findAll();
+        List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiante,
+                        new TypeToken<List<EstudianteDTO>>() {}.getType());
+        return estudiantesDTO;
     }
 
     @Override
     public EstudianteDTO getEstudianteById(Integer id) {
-        Optional<Estudiante> estudiante = estudianteRepository.findById(id);        
+        Estudiante estudiante = estudianteRepository.findById(id).orElse(null);        
         EstudianteDTO estudianteDTO = modelMapper.map(estudiante, EstudianteDTO.class);
         return estudianteDTO;
     }

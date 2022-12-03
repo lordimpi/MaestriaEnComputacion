@@ -24,6 +24,11 @@ public class EstudianteRestController {
     @Autowired
     private IEstudianteService estudianteService;
 
+    @GetMapping("/estudiantes")
+    public List<EstudianteDTO> index() {
+        return estudianteService.getAllEstudiante();
+    }
+
     @GetMapping("/estudiantes/{id}")
     public EstudianteDTO show(@PathVariable Integer id){
         return estudianteService.getEstudianteById(id);

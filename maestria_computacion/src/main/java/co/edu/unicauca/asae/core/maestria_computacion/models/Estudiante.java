@@ -3,6 +3,8 @@ package co.edu.unicauca.asae.core.maestria_computacion.models;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,6 +27,7 @@ public class Estudiante extends Persona {
     @Column(nullable = false)
     private Date fechaIngreso;
     
+    @JsonIgnore
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")
     private Direccion objDireccion;
     

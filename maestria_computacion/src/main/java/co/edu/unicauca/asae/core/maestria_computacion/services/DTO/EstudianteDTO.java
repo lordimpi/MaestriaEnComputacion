@@ -3,6 +3,7 @@ import java.util.Date;
 import java.util.List;
 
 import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
+import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.Setter;
 public class EstudianteDTO extends PersonaDTO {
     private Date fechaIngreso;
 
-    private List<TelefonoDTO> telefonos;
+    private List<Telefono> telefonos;
 
     private Direccion objDireccion;
 }
