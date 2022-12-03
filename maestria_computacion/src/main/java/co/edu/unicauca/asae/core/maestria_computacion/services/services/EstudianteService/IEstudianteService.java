@@ -15,5 +15,8 @@ public interface IEstudianteService {
     public boolean deleteEstudiante(Integer id);
 
     public List<EstudianteDTO> getAllEstudiante();
-    
+
+    public List<EstudianteDTO> getAllLazy();
+
+    public EstudianteDTO getByIdLazy(Integer id);
 }

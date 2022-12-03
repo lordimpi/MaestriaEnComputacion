@@ -20,7 +20,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.services.services.Estudian
 @RequestMapping("/api")
 @Validated
 public class EstudianteRestController {
-    
+
     @Autowired
     private IEstudianteService estudianteService;
 
@@ -30,24 +30,44 @@ public class EstudianteRestController {
     }
 
     @GetMapping("/estudiantes/{id}")
-    public EstudianteDTO show(@PathVariable Integer id){
+    public EstudianteDTO show(@PathVariable Integer id) {
         return estudianteService.getEstudianteById(id);
     }
 
     @PostMapping("/estudiantes")
-    public EstudianteDTO create(@RequestBody EstudianteDTO estudiante){
+    public EstudianteDTO create(@RequestBody EstudianteDTO estudiante) {
         EstudianteDTO objEstudiante = null;
         objEstudiante = estudianteService.createEstudiante(estudiante);
         return objEstudiante;
     }
 
     @DeleteMapping("/estudiantes/{id}")
-    public Boolean delete(@PathVariable Integer id){
-        Boolean bandera=false;
-        EstudianteDTO estudianteActual =  estudianteService.getEstudianteById(id);
-        if (estudianteActual!=null) {
+    public Boolean delete(@PathVariable Integer id) {
+        Boolean bandera = false;
+        EstudianteDTO estudianteActual = estudianteService.getEstudianteById(id);
+        if (estudianteActual != null) {
             bandera = estudianteService.deleteEstudiante(id);
         }
         return bandera;
+    }
+
+    @PutMapping("/estudiantes/{id}")
+    public EstudianteDTO update(@RequestBody EstudianteDTO estudiante, @PathVariable Integer id) {
+        EstudianteDTO objEstudiante = null;
+        EstudianteDTO estudianteActual = estudianteService.getEstudianteById(id);
+        if (estudianteActual != null) {
+            objEstudiante = estudianteService.updateEstudiante(id, estudiante);
+        }
+        return objEstudiante;
+    }
+
+    @GetMapping("/estudiantes/lazy")
+    public List<EstudianteDTO> indexLazy(){
+        return estudianteService.getAllLazy();
+    }
+
+    @GetMapping("/estudiantes/lazy/{id}")
+    public EstudianteDTO showLazy(@PathVariable Integer id){
+        return estudianteService.getByIdLazy(id);
     }
 }
