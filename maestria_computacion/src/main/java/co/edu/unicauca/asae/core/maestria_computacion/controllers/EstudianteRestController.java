@@ -75,4 +75,9 @@ public class EstudianteRestController {
     public EstudianteDTO showLazy(@PathVariable Integer id){
         return estudianteService.getByIdLazy(id);
     }
+
+    @GetMapping("/estudiantes/buscarporpatron/{patron}")
+    public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron){
+        return estudianteService.buscarPorPatron(patron);
+    }
 }

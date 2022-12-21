@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -28,7 +29,9 @@ public class EstudianteDTO extends PersonaDTO {
     @PastOrPresent(message = "{estudiante.date.past}")
     private Date fechaIngreso;
 
+    @Valid
     private List<Telefono> telefonos;
 
+    @Valid
     private Direccion objDireccion;
 }

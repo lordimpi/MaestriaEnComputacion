@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,5 +147,23 @@ public class EstudianteServiceImpl implements IEstudianteService {
         }
         EstudianteDTO estudianteDTO = mapperLazy.map(estudiante.get(), EstudianteDTO.class);
         return estudianteDTO;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EstudianteDTO> buscarPorPatron(String patron){
+        System.out.println("Invocando al metodo buscar estudiantes por patron");
+        //estudianteRepository.buscarEstudiantePorPatron(patron);
+        //List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
+        //return estudiantesDTO;
+        return null;
+        /*
+         * System.out.println("Invocando al metodo obtener todos los estudiantes");
+        Iterable<Estudiante> estudiante = this.estudianteRepository.findAll();
+        List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiante,
+                new TypeToken<List<EstudianteDTO>>() {
+                }.getType());
+        return estudiantesDTO;
+         */
     }
 }
