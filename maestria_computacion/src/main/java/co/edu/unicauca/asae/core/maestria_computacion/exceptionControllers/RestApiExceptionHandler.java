@@ -25,6 +25,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.excep
 @ControllerAdvice
 public class RestApiExceptionHandler {
 
+
         /*@ExceptionHandler(Exception.class)
         public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                         final Exception ex, final Locale locale) {

@@ -10,7 +10,6 @@ import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class PersonaDTO {
-    
     private Integer id;
     
     @NotEmpty(message = "{person.id.empty}")

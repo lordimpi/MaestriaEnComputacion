@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EstudianteDTO extends PersonaDTO {
-
     @NotEmpty(message = "{estudiante.correoelectronico.empty}")
     @NotNull(message = "{estudiante.correoelectronico.nulo}")
     @Email(message = "{estudiante.correoelectronico.email}")
