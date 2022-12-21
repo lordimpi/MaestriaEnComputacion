@@ -1,6 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions;
 
-public class ReglaNegocioExcepcion extends GestionClientesRuntimeException {
+public class ReglaNegocioExcepcion extends GestionEstudiantesRuntimeException {
 
   private static final String FORMATO_EXCEPCION = "%s - Violación a regla de negocio: %s";
 

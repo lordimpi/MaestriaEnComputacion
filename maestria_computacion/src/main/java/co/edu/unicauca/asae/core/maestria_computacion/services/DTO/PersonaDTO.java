@@ -1,6 +1,5 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.DTO;
-import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Empty;
-
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
@@ -11,21 +10,24 @@ import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class PersonaDTO {
+    private Integer id;
     
-    private int id;
-    
+    @NotEmpty(message = "{person.id.empty}")
     @PositiveOrZero(message = "{person.id.positive}")
-    @NotNull(message = "{person.id.empty}")
+    @NotNull(message = "{person.id.null}")
     private String noId;
     
-    @NotNull(message = "{person.typeIdentification.empty}")
+    @NotEmpty(message = "{person.typeIdentification.empty}")
+    @NotNull(message = "{person.typeIdentification.null}")
     private String tipoIdentificacion;
 
+    @NotEmpty(message = "{person.name.empty}")
     @Size(min = 3, max = 50, message = "{person.name.length}")
-    @NotNull(message = "{person.name.empty}")
+    @NotNull(message = "{person.name.null}")
     private String nombres;
 
+    @NotEmpty(message = "{person.lastname.empty}")
     @Size(min = 3, max = 50, message = "{person.lastname.length}")
-    @NotNull(message = "{person.lastname.empty}")
+    @NotNull(message = "{person.lastname.null}")
     private String apellidos;    
 }
