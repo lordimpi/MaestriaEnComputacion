@@ -39,10 +39,10 @@ public class EstudianteRestController {
 
 
     @PostMapping("/estudiantes")
-    public ResponseEntity<?> create(@Valid @RequestBody EstudianteDTO estudiante) {
+    public ResponseEntity<EstudianteDTO> create(@Valid @RequestBody EstudianteDTO estudiante) {
         EstudianteDTO objEstudiante = null;
         objEstudiante = estudianteService.createEstudiante(estudiante);
-        ResponseEntity<?> objRespuesta = new ResponseEntity<EstudianteDTO>(objEstudiante, HttpStatus.CREATED);
+        ResponseEntity<EstudianteDTO> objRespuesta = new ResponseEntity<EstudianteDTO>(objEstudiante, HttpStatus.CREATED);
 		return objRespuesta;
     }
 
