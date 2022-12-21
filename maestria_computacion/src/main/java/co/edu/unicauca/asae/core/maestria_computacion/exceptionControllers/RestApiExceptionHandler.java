@@ -25,7 +25,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.excep
 @ControllerAdvice
 public class RestApiExceptionHandler {
 
-        @ExceptionHandler(Exception.class)
+        /*@ExceptionHandler(Exception.class)
         public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                         final Exception ex, final Locale locale) {
                 final Error error = ErrorUtils
@@ -34,7 +34,7 @@ public class RestApiExceptionHandler {
                                                 HttpStatus.INTERNAL_SERVER_ERROR.value())
                                 .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
                 return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
 
         @ExceptionHandler(EntidadYaExisteException.class)
         public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,

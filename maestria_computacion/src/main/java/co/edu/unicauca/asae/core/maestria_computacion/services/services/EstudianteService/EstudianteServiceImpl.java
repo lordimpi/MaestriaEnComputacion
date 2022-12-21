@@ -40,7 +40,6 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Transactional()
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante) {
         EstudianteDTO estudianteDTO = null;
-
         if (estudiante.getId() != null) {
 			final Boolean bandera = this.estudianteRepository.existsById(estudiante.getId());
 			if (bandera) {
@@ -57,7 +56,6 @@ public class EstudianteServiceImpl implements IEstudianteService {
         objEstudiante.getTelefonos().forEach(telefono -> telefono.setObjEstudiante(objEstudiante));
         Estudiante estudianteEntity = this.estudianteRepository.save(objEstudiante);
         estudianteDTO = this.modelMapper.map(estudianteEntity, EstudianteDTO.class);
-        System.out.println("Estudiante Creado!");
         return estudianteDTO;
     }
 
