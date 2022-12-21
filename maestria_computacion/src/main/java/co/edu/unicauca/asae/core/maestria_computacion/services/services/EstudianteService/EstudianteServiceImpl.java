@@ -7,9 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
@@ -30,9 +32,24 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Qualifier("estudianteLazy")
     private ModelMapper mapperLazy;
 
+    @Autowired
+	@Qualifier("messageResourceSB")
+	MessageSource messageSource;
+
     @Override
+    @Transactional()
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante) {
         EstudianteDTO estudianteDTO = null;
+
+        if (estudiante.getId() != null) {
+			final Boolean bandera = this.estudianteRepository.existsById(estudiante.getId());
+			if (bandera) {
+				EntidadYaExisteException objException = new EntidadYaExisteException(
+						"Cliente con id " + estudiante.getId() + " existe en la BD");
+				throw objException;
+
+			}
+		}
 
         System.out.println("invocando al metodo crear estudiante");
         Estudiante objEstudiante = this.modelMapper.map(estudiante, Estudiante.class);
