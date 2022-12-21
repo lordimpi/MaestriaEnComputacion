@@ -5,6 +5,7 @@ import java.util.List;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
@@ -17,11 +18,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EstudianteDTO extends PersonaDTO {
 
-    @NotNull(message = "NO DEBE SER NULO")
-    @Email(message = "DEBE SER EMAIL")
+    @NotEmpty(message = "{estudiante.correoelectronico.empty}")
+    @NotNull(message = "{estudiante.correoelectronico.nulo}")
+    @Email(message = "{estudiante.correoelectronico.email}")
     private String correoElectronico;
 
-    @NotNull(message = "{estudiante.fechaingreso.empty}")
+    @NotNull(message = "{estudiante.fechaingreso.nulo}")
+    //NOTA: la notacion NotEmpty, no es soportada para formato de fecha
     @PastOrPresent(message = "{estudiante.date.past}")
     private Date fechaIngreso;
 
