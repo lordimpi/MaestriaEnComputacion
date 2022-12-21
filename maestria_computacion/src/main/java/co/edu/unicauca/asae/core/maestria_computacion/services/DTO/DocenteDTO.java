@@ -13,13 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocenteDTO {
-    private Integer id;
-    private String noId;
-    private String tipoIdentificacion;
-    private String nombres;
-    private String apellidos;
-    
+public class DocenteDTO extends PersonaDTO{
     @NotNull(message = "{docente.universidad.empty}")
     private String universidad;
     
