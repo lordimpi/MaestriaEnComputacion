@@ -21,6 +21,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.excep
 import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.ErrorUtils;
 import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.Error;
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.ErrorAlmacenamientoDBException;
 //TODO: indica que metodos de la clase capturaran excepciones
 @ControllerAdvice
 public class RestApiExceptionHandler {
@@ -90,5 +91,17 @@ public class RestApiExceptionHandler {
         ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
                 return new ResponseEntity<>("nombre del método y parametros erroneos: " + e.getMessage(),
                                 HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(ErrorAlmacenamientoDBException.class)
+        public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                        final ErrorAlmacenamientoDBException ex, final Locale locale) {
+                final Error error = ErrorUtils
+                                .crearError(CodigoError.VIOLACION_ALMACENAMIENTO_DB.getCodigo(),
+                                                String.format("%s, %s", CodigoError.VIOLACION_ALMACENAMIENTO_DB.getLlaveMensaje(),
+                                                                ex.getMessage()),
+                                                HttpStatus.NOT_ACCEPTABLE.value())
+                                .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
+                return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
         }
 }
