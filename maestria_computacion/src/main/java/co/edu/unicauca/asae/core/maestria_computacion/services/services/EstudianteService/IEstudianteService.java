@@ -3,6 +3,9 @@ package co.edu.unicauca.asae.core.maestria_computacion.services.services.Estudia
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
+import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteResponse.EstudianteResponseRest;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
 public interface IEstudianteService {
@@ -22,4 +25,9 @@ public interface IEstudianteService {
     public EstudianteDTO getByIdLazy(Integer id);
 
     public List<EstudianteDTO> buscarPorPatron(String patron);
+
+    public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo);
+    
+
+    
 }

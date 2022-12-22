@@ -10,6 +10,8 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.EstudianteRepository;
+import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteResponse.EstudianteResponseRest;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
 @Service
@@ -167,4 +170,15 @@ public class EstudianteServiceImpl implements IEstudianteService {
         List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
         return estudiantesDTO;
     }
+
+    @Override
+    public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo) {
+        System.out.println("Invocando al metodo buscar por numero y tipo de identificación");
+		Estudiante objEstudiante = this.estudianteRepository.buscarPorNumeroyTipoIdentificacion(numero, tipo);  
+       	System.out.println("Nombres: " + objEstudiante.getNombres());
+		System.out.println("Apellidos: " + objEstudiante.getApellidos());
+		EstudianteResponseRest response = new EstudianteResponseRest();
+        response.getEstudianteResponse().getEstudiantes().add(objEstudiante);
+		return new ResponseEntity<EstudianteResponseRest>(response, HttpStatus.OK); 
+    }    
 }
