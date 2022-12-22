@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteResponse.EstudianteResponseRest;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService.IEstudianteService;
 import jakarta.validation.Valid;
@@ -80,4 +81,10 @@ public class EstudianteRestController {
     public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron){
         return estudianteService.buscarPorPatron(patron);
     }
+
+    @GetMapping("/estudiantes/buscarpornumeroytipo/{numero}/{tipo}")
+	public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipo(@PathVariable String numero, @PathVariable String tipo) {
+		ResponseEntity<EstudianteResponseRest> response = this.estudianteService.buscarPorNumeroyTipoIdentificacion(numero, tipo);
+		return response;
+	}
 }
