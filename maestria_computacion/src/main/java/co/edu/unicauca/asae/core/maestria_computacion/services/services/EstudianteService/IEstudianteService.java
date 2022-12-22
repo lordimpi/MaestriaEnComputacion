@@ -26,8 +26,8 @@ public interface IEstudianteService {
 
     public List<EstudianteDTO> buscarPorPatron(String patron);
 
+    public List<EstudianteDTO> findByIdPorRango(int id1, int id2);
+    
     public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo);
-    
 
-    
 }

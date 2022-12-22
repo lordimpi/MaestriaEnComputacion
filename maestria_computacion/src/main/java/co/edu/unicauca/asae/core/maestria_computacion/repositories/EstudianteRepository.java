@@ -18,7 +18,11 @@ public interface EstudianteRepository extends CrudRepository<Estudiante, Integer
         @Param("patron") String nombre
     );
     
-  @Query("SELECT u FROM Estudiante u WHERE u.noId = :numero and u.tipoIdentificacion = :tipo")
+    //@Query("select d from estudiantes d where d.nombres like %?1")
+	//public List<Estudiante> buscarEstudiantePorPatron(String patron);   
+    List<Estudiante> findByIdBetween(int id1, int id2);
+
+@Query("SELECT u FROM Estudiante u WHERE u.noId = :numero and u.tipoIdentificacion = :tipo")
 	public Estudiante buscarPorNumeroyTipoIdentificacion(			
 			@Param("numero") String noIdentificacion,
             @Param("tipo") String tipoIdentificacion);  

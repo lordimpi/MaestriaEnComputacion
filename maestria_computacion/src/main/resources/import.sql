@@ -1,5 +1,6 @@
 INSERT INTO `estudiantes` (`id_persona`, `apellidos`, `no_identificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correoElectronico`) VALUES (NULL, 'Montenegro Lopez', '123455', 'Juan Carlos', 'cc', '2022-12-01','edynsonmj@unicauca.edu.co');
-INSERT INTO `estudiantes` (`id_persona`, `apellidos`, `no_identificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Jimenez', '23256', 'edynson', 'cc', '2022-12-01');
+INSERT INTO `estudiantes` (`id_persona`, `apellidos`, `no_identificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correoElectronico`) VALUES (NULL, 'Jimenez', '23256', 'edynson', 'cc', '2022-12-01','edynsonmj@unicauca.edu.co');
+
 INSERT INTO `telefonos` (`numero`, `tipo`, `id_persona`) VALUES ('2342354','movil',1);
 INSERT INTO `telefonos` (`numero`, `tipo`, `id_persona`) VALUES ('2342354','fijo',2);
 INSERT INTO `direcciones` (`idDireccion`, `ciudad`, `direccionResidencia`, `pais`) VALUES ('1', 'Popayan', 'calle 6 5-20', 'Colombia');
