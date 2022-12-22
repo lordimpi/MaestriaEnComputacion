@@ -26,6 +26,9 @@ import lombok.Setter;
 public class Estudiante extends Persona {
     @Column(nullable = false)
     private Date fechaIngreso;
+
+    @Column(nullable = false)
+    private String correoElectronico;
     
     @JsonIgnore
     @OneToOne(optional = false,fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "objEstudiante")

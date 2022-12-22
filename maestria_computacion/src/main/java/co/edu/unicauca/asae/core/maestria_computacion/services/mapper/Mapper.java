@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
-import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
+
 import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
-import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.CursoDTO;
+
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.DocenteDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 

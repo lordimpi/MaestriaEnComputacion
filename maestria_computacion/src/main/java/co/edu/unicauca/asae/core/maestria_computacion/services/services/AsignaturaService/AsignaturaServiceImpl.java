@@ -7,9 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadNoExisteException;
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
@@ -34,6 +37,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     @Transactional()
     public AsignaturaDTO createAsignatura(AsignaturaDTO asignatura) {
         System.out.println("Invocando al metodo crear asignatura");
+        
         Asignatura objAsignatura = modelMapper.map(asignatura, Asignatura.class);
         objAsignatura.getCursos().forEach(c -> c.setObjAsignatura(objAsignatura));
         for (var item : objAsignatura.getDocentes()) {
@@ -61,7 +65,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
         if (asignatura == null) {
             System.out.println("No exisite el asignatura con id: "+id);
-            return null;
+            throw new EntidadNoExisteException("No existe la asignatura con id: " + id);
         }
         AsignaturaDTO asignaturaDTO = modelMapper2.map(asignatura, AsignaturaDTO.class);
         return asignaturaDTO;
@@ -93,13 +97,21 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     @Override
     public boolean deleteAsignatura(Integer id) {
         System.out.println("Invocando al metodo eliminar asignatura");
-        boolean result = false;
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
         if (asignatura != null) {
             asignaturaRepository.delete(asignatura);
-            result = true;
+            return true;
         }
-        return result;
+        throw new EntidadNoExisteException("No existe la asignatura con id: " + id);
+    }
+
+    @Override
+    public List<AsignaturaDTO> findByNombreIgnoreCaseContainsOrderByNombre(String name) {
+        Iterable<Asignatura> asignaturas = asignaturaRepository.findByNombreIgnoreCaseContainsOrderByNombre(name);
+        List<AsignaturaDTO> asignaturasDTO = modelMapper.map(
+                asignaturas, new TypeToken<List<AsignaturaDTO>>() {
+                }.getType());
+        return asignaturasDTO;
     }
 
 }
