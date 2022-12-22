@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.core.maestria_computacion.services.services.Docente
 
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.DocenteRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.response.DocenteResponseRest;
@@ -31,6 +32,10 @@ public class DocenteServiceImpl implements IDocenteService {
     @Transactional
     public DocenteDTO createDocente(DocenteDTO docente) {
         System.out.println("invocando al metodo crear docente");
+        Docente qDocente = docenteRepository.buscarPorNumeroyTipoIdentificacion(docente.getNoId(), docente.getTipoIdentificacion());
+        if (qDocente != null) {
+            throw new EntidadYaExisteException("El docente ya existe");
+        }
         Docente objDocente = modelMapper.map(docente, Docente.class);
         Docente docenteEntity = docenteRepository.save(objDocente);
         DocenteDTO docenteDTO = modelMapper.map(docenteEntity, DocenteDTO.class);

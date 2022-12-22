@@ -10,5 +10,5 @@ public interface DocenteRepository extends CrudRepository<Docente, Integer>{
     @Query("SELECT u FROM Docente u WHERE u.noId = :numero and u.tipoIdentificacion = :tipo")
 	public Docente buscarPorNumeroyTipoIdentificacion(			
 			@Param("numero") String noIdentificacion,
-            @Param("tipo") String tipoIdentificacion); 
+            @Param("tipo") String tipoIdentificacion);
 }
