@@ -7,12 +7,13 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 
 @Repository
-public interface EstudianteRepository extends CrudRepository<Estudiante, Integer>{
-    
-    //@Query("select d from estudiantes d where d.nombres like %?1")
-	//public List<Estudiante> buscarEstudiantePorPatron(String patron);   
+public interface EstudianteRepository extends CrudRepository<Estudiante, Integer> {
+
+    @Query(value = "SELECT COUNT(*) FROM estudiantes WHERE correoElectronico = :correoElectronico", nativeQuery = true)
+    public Optional<Integer> existByEmail(@Param("correoElectronico") String correoElectronico);
 }

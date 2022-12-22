@@ -6,7 +6,7 @@ import java.util.List;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
 public interface IEstudianteService {
-    
+
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante);
 
     public EstudianteDTO getEstudianteById(Integer id);
@@ -22,4 +22,6 @@ public interface IEstudianteService {
     public EstudianteDTO getByIdLazy(Integer id);
 
     public List<EstudianteDTO> buscarPorPatron(String patron);
+
+    public boolean existByEmail(String email);
 }

@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService.IEstudianteService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/api")
@@ -37,13 +41,13 @@ public class EstudianteRestController {
         return estudianteService.getEstudianteById(id);
     }
 
-
     @PostMapping("/estudiantes")
     public ResponseEntity<EstudianteDTO> create(@Valid @RequestBody EstudianteDTO estudiante) {
         EstudianteDTO objEstudiante = null;
         objEstudiante = estudianteService.createEstudiante(estudiante);
-        ResponseEntity<EstudianteDTO> objRespuesta = new ResponseEntity<EstudianteDTO>(objEstudiante, HttpStatus.CREATED);
-		return objRespuesta;
+        ResponseEntity<EstudianteDTO> objRespuesta = new ResponseEntity<EstudianteDTO>(objEstudiante,
+                HttpStatus.CREATED);
+        return objRespuesta;
     }
 
     @DeleteMapping("/estudiantes/{id}")
@@ -67,17 +71,23 @@ public class EstudianteRestController {
     }
 
     @GetMapping("/estudiantes/lazy")
-    public List<EstudianteDTO> indexLazy(){
+    public List<EstudianteDTO> indexLazy() {
         return estudianteService.getAllLazy();
     }
 
     @GetMapping("/estudiantes/lazy/{id}")
-    public EstudianteDTO showLazy(@PathVariable Integer id){
+    public EstudianteDTO showLazy(@PathVariable Integer id) {
         return estudianteService.getByIdLazy(id);
     }
 
     @GetMapping("/estudiantes/buscarporpatron/{patron}")
-    public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron){
+    public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron) {
         return estudianteService.buscarPorPatron(patron);
+    }
+
+    @GetMapping("/estudiantes/existByEmail/{email}")
+    public boolean existByEmail(
+            @PathVariable @NotEmpty(message = "{estudiante.correoelectronico.empty}") @Email(message = "{estudiante.correoelectronico.email}") String email) {
+        return estudianteService.existByEmail(email);
     }
 }
