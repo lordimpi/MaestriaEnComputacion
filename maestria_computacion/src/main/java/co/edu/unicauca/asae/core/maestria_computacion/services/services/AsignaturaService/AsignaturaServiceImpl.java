@@ -60,7 +60,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
         System.out.println("Invocando al metodo buscar asignatura por id");
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
         if (asignatura == null) {
-            System.out.println("No exisite el asignatura con id: "+id);
+            System.out.println("No exisite el asignatura con id: " + id);
             return null;
         }
         AsignaturaDTO asignaturaDTO = modelMapper2.map(asignatura, AsignaturaDTO.class);
@@ -100,6 +100,15 @@ public class AsignaturaServiceImpl implements IAsignturaService {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public List<AsignaturaDTO> findByNombreIgnoreCaseContainsOrderByNombre(String name) {
+        Iterable<Asignatura> asignaturas = asignaturaRepository.findByNombreIgnoreCaseContainsOrderByNombre(name);
+        List<AsignaturaDTO> asignaturasDTO = modelMapper.map(
+                asignaturas, new TypeToken<List<AsignaturaDTO>>() {
+                }.getType());
+        return asignaturasDTO;
     }
 
 }

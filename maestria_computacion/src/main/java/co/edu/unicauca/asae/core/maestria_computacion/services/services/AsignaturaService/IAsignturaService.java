@@ -14,4 +14,6 @@ public interface IAsignturaService {
     public AsignaturaDTO updateAsignatura(Integer id, AsignaturaDTO asignatura);
 
     public boolean deleteAsignatura(Integer id);
+
+    public List<AsignaturaDTO> findByNombreIgnoreCaseContainsOrderByNombre(String name);
 }
