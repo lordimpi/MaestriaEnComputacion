@@ -177,6 +177,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
        	System.out.println("Nombres: " + objEstudiante.getNombres());
 		System.out.println("Apellidos: " + objEstudiante.getApellidos());
 		EstudianteResponseRest response = new EstudianteResponseRest();
+        response.getEstudianteResponse().getEstudiantes().add(objEstudiante);
 		return new ResponseEntity<EstudianteResponseRest>(response, HttpStatus.OK); 
-    }
+    }    
 }
