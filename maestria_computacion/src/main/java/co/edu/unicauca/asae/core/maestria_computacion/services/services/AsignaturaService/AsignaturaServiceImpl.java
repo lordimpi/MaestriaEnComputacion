@@ -105,4 +105,13 @@ public class AsignaturaServiceImpl implements IAsignturaService {
         throw new EntidadNoExisteException("No existe la asignatura con id: " + id);
     }
 
+    @Override
+    public List<AsignaturaDTO> findByNombreIgnoreCaseContainsOrderByNombre(String name) {
+        Iterable<Asignatura> asignaturas = asignaturaRepository.findByNombreIgnoreCaseContainsOrderByNombre(name);
+        List<AsignaturaDTO> asignaturasDTO = modelMapper.map(
+                asignaturas, new TypeToken<List<AsignaturaDTO>>() {
+                }.getType());
+        return asignaturasDTO;
+    }
+
 }

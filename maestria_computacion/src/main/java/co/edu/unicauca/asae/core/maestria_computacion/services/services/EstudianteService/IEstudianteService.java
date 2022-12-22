@@ -9,7 +9,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteRespons
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
 public interface IEstudianteService {
-    
+
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante);
 
     public EstudianteDTO getEstudianteById(Integer id);
@@ -26,8 +26,9 @@ public interface IEstudianteService {
 
     public List<EstudianteDTO> buscarPorPatron(String patron);
 
+    public boolean existByEmail(String email);
+
     public List<EstudianteDTO> findByIdPorRango(int id1, int id2);
     
     public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo);
-
 }
