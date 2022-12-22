@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,8 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.EstudianteRepository;
+import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteResponse.EstudianteResponseRest;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 
 @Service
@@ -154,23 +158,38 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Transactional(readOnly = true)
     public List<EstudianteDTO> buscarPorPatron(String patron) {
         System.out.println("Invocando al metodo buscar estudiantes por patron");
-        // estudianteRepository.buscarEstudiantePorPatron(patron);
-        // List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantes,new
-        // TypeToken<List<EstudianteDTO>>() {}.getType());
-        // return estudiantesDTO;
-        return null;
-        /*
-         * System.out.println("Invocando al metodo obtener todos los estudiantes");
-         * Iterable<Estudiante> estudiante = this.estudianteRepository.findAll();
-         * List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiante,
-         * new TypeToken<List<EstudianteDTO>>() {
-         * }.getType());
-         * return estudiantesDTO;
-         */
+        
+        List<Estudiante> estudiantes = estudianteRepository.buscarEstudiantePorPatron(patron);
+        System.out.println(estudiantes.size());
+        List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
+        return estudiantesDTO;
     }
 
     @Override
     public boolean existByEmail(String email) {
         return (estudianteRepository.existByEmail(email).orElse(0) == 1) ? true : false;
     }
+
+    @Override
+	public List<EstudianteDTO> findByIdPorRango(int id1, int id2) {
+
+		List<Estudiante> lista = this.estudianteRepository.findByIdBetween(id1, id2);
+		System.out.println("Registros encontrados:" + lista.size());
+		for (Estudiante c : lista) {
+			System.out.println(c.getId() + ":" + c.getNombres() + ":" + c.getApellidos());
+		}
+        List<EstudianteDTO> listas = modelMapper.map(lista,new TypeToken<List<EstudianteDTO>>() {
+                }.getType());
+		return listas;
+	}
+
+    public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo) {
+        System.out.println("Invocando al metodo buscar por numero y tipo de identificación");
+		Estudiante objEstudiante = this.estudianteRepository.buscarPorNumeroyTipoIdentificacion(numero, tipo);  
+       	System.out.println("Nombres: " + objEstudiante.getNombres());
+		System.out.println("Apellidos: " + objEstudiante.getApellidos());
+		EstudianteResponseRest response = new EstudianteResponseRest();
+        response.getEstudianteResponse().getEstudiantes().add(objEstudiante);
+		return new ResponseEntity<EstudianteResponseRest>(response, HttpStatus.OK); 
+    }    
 }

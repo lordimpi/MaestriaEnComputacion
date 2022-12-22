@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.CursoRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.CursoDTO;
@@ -54,7 +55,7 @@ public class CursoServiceImpl implements ICursoService {
         Curso curso = cursoRepository.findById(id).orElse(null);
         if (curso == null) {
             System.out.println("No exisite el curso con id: "+id);
-            return null;
+            throw new EntidadNoExisteException("No existe el curso con id: " + id);
         }
         CursoDTO cursoDTO = modelMapper.map(curso, CursoDTO.class);
         return cursoDTO;
@@ -81,13 +82,12 @@ public class CursoServiceImpl implements ICursoService {
     @Transactional(readOnly = false)
     public boolean deleteCurso(Integer id) {
         System.out.println("Invocando al metodo eliminar curso por id: " + id);
-        boolean result = false;
         Curso curso = cursoRepository.findById(id).orElse(null);
         if (curso != null) {
             cursoRepository.delete(curso);
-            result = true;
+            return true;
         }
-        return result;
+        throw new EntidadNoExisteException("No existe la asignatura con id: " + id);
     }
 
 
