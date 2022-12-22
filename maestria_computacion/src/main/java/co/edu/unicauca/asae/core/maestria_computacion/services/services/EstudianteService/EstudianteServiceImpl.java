@@ -40,8 +40,8 @@ public class EstudianteServiceImpl implements IEstudianteService {
     private ModelMapper mapperLazy;
 
     @Autowired
-    @Qualifier("messageResourceSB")
-    MessageSource messageSource;
+	@Qualifier("messageResourceSB")
+	MessageSource messageSource;
 
     @Override
     @Transactional()
@@ -57,14 +57,14 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
         EstudianteDTO estudianteDTO = null;
         if (estudiante.getId() != null) {
-            final Boolean bandera = this.estudianteRepository.existsById(estudiante.getId());
-            if (bandera) {
-                EntidadYaExisteException objException = new EntidadYaExisteException(
-                        "Cliente con id " + estudiante.getId() + " existe en la BD");
-                throw objException;
+			final Boolean bandera = this.estudianteRepository.existsById(estudiante.getId());
+			if (bandera) {
+				EntidadYaExisteException objException = new EntidadYaExisteException(
+						"Cliente con id " + estudiante.getId() + " existe en la BD");
+				throw objException;
 
-            }
-        }
+			}
+		}
 
         System.out.println("invocando al metodo crear estudiante");
         Estudiante objEstudiante = this.modelMapper.map(estudiante, Estudiante.class);
@@ -107,7 +107,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
     public EstudianteDTO getEstudianteById(Integer id) {
         Estudiante estudiante = estudianteRepository.findById(id).orElse(null);
         if (estudiante == null) {
-            System.out.println("No exisite el estudiante con id: " + id);
+            System.out.println("No exisite el estudiante con id: "+id);
             return null;
         }
         EstudianteDTO estudianteDTO = modelMapper.map(estudiante, EstudianteDTO.class);
@@ -158,7 +158,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
     public EstudianteDTO getByIdLazy(Integer id) {
         Optional<Estudiante> estudiante = estudianteRepository.findById(id);
         if (estudiante == null) {
-            System.out.println("No exisite el estudiante con id: " + id);
+            System.out.println("No exisite el estudiante con id: "  +  id);
             return null;
         }
         EstudianteDTO estudianteDTO = mapperLazy.map(estudiante.get(), EstudianteDTO.class);
@@ -169,23 +169,17 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Transactional(readOnly = true)
     public List<EstudianteDTO> buscarPorPatron(String patron) {
         System.out.println("Invocando al metodo buscar estudiantes por patron");
-        /*
-         * Collection<Estudiante> estudiantes =
-         * estudianteRepository.buscarEstudiantePorPatron(patron);
-         * List<Estudiante> estudiantesList = new ArrayList<>(estudiantes);
-         * for (Estudiante estudiante : estudiantes) {
-         * System.out.println(estudiante.getNombres());
-         * }
-         * List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantesList,new
-         * TypeToken<List<EstudianteDTO>>() {}.getType());
-         * System.out.println(estudiantesDTO.size());
-         * return estudiantesDTO;
-         */
+        
         List<Estudiante> estudiantes = estudianteRepository.buscarEstudiantePorPatron(patron);
         System.out.println(estudiantes.size());
         List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes, new TypeToken<List<EstudianteDTO>>() {
         }.getType());
         return estudiantesDTO;
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return (estudianteRepository.existByEmail(email).orElse(0) == 1) ? true : false;
     }
 
     @Override

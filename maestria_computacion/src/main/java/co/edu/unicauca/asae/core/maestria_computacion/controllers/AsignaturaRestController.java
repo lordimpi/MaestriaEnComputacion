@@ -36,6 +36,12 @@ public class AsignaturaRestController {
         return asignatura;
     }
 
+    @GetMapping("/asignaturas/likeName/{name}")
+    public List<AsignaturaDTO> findByNombreIgnoreCaseContainsOrderByNombre(@PathVariable String name) {
+        List<AsignaturaDTO> asignaturas = asignaturaService.findByNombreIgnoreCaseContainsOrderByNombre(name);
+        return asignaturas;
+    }
+
     @PostMapping("/asignaturas")
     public AsignaturaDTO create(@RequestBody AsignaturaDTO asignatura) {
         AsignaturaDTO asignaturaDTO = null;
@@ -47,7 +53,7 @@ public class AsignaturaRestController {
     public AsignaturaDTO update(@RequestBody AsignaturaDTO asignatura, @PathVariable Integer id) {
         AsignaturaDTO asignaturaDTO = null;
         AsignaturaDTO asignaturaActual = asignaturaService.getAsignaturaById(id);
-        
+
         if (asignaturaActual != null) {
             asignaturaDTO = asignaturaService.updateAsignatura(id, asignaturaDTO);
         }
