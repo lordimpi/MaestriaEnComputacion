@@ -15,4 +15,5 @@ public interface EstudianteRepository extends CrudRepository<Estudiante, Integer
     
     //@Query("select d from estudiantes d where d.nombres like %?1")
 	//public List<Estudiante> buscarEstudiantePorPatron(String patron);   
+    List<Estudiante> findByIdBetween(int id1, int id2);
 }

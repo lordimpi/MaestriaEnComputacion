@@ -166,4 +166,18 @@ public class EstudianteServiceImpl implements IEstudianteService {
         return estudiantesDTO;
          */
     }
+
+    @Override
+	public List<EstudianteDTO> findByIdPorRango(int id1, int id2) {
+
+		List<Estudiante> lista = this.estudianteRepository.findByIdBetween(id1, id2);
+		System.out.println("Registros encontrados:" + lista.size());
+		for (Estudiante c : lista) {
+			System.out.println(c.getId() + ":" + c.getNombres() + ":" + c.getApellidos());
+		}
+        List<EstudianteDTO> listas = modelMapper.map(lista,new TypeToken<List<EstudianteDTO>>() {
+                }.getType());
+		return listas;
+	}
+
 }

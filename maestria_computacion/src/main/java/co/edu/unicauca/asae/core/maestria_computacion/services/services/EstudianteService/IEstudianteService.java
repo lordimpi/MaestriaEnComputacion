@@ -22,4 +22,6 @@ public interface IEstudianteService {
     public EstudianteDTO getByIdLazy(Integer id);
 
     public List<EstudianteDTO> buscarPorPatron(String patron);
+
+    public List<EstudianteDTO> findByIdPorRango(int id1, int id2);
 }

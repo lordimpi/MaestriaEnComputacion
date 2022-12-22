@@ -80,4 +80,12 @@ public class EstudianteRestController {
     public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron){
         return estudianteService.buscarPorPatron(patron);
     }
+
+    @GetMapping("/estudiantes/{id1}/{id2}")
+    public List<EstudianteDTO> showRangoClientes(@PathVariable Integer id1, @PathVariable Integer id2) {
+        List<EstudianteDTO> lista = null;
+        System.out.println("Buscando en el rango: " + id1 + " y " + id2);
+        lista = estudianteService.findByIdPorRango(id1, id2);
+        return lista;
+    }
 }
