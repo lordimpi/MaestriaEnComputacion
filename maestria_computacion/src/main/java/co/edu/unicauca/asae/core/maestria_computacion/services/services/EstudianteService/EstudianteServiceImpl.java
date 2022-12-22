@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -153,17 +154,17 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Transactional(readOnly = true)
     public List<EstudianteDTO> buscarPorPatron(String patron){
         System.out.println("Invocando al metodo buscar estudiantes por patron");
-        //estudianteRepository.buscarEstudiantePorPatron(patron);
-        //List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
-        //return estudiantesDTO;
-        return null;
-        /*
-         * System.out.println("Invocando al metodo obtener todos los estudiantes");
-        Iterable<Estudiante> estudiante = this.estudianteRepository.findAll();
-        List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiante,
-                new TypeToken<List<EstudianteDTO>>() {
-                }.getType());
+        /*Collection<Estudiante> estudiantes = estudianteRepository.buscarEstudiantePorPatron(patron);
+        List<Estudiante> estudiantesList = new ArrayList<>(estudiantes);
+        for (Estudiante estudiante : estudiantes) {
+            System.out.println(estudiante.getNombres());
+        }
+        List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantesList,new TypeToken<List<EstudianteDTO>>() {}.getType());
+        System.out.println(estudiantesDTO.size());
+        return estudiantesDTO; */
+        List<Estudiante> estudiantes = estudianteRepository.buscarEstudiantePorPatron(patron);
+        System.out.println(estudiantes.size());
+        List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
         return estudiantesDTO;
-         */
     }
 }
