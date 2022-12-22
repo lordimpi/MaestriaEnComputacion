@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,9 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
@@ -30,9 +33,23 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Qualifier("estudianteLazy")
     private ModelMapper mapperLazy;
 
+    @Autowired
+	@Qualifier("messageResourceSB")
+	MessageSource messageSource;
+
     @Override
+    @Transactional()
     public EstudianteDTO createEstudiante(EstudianteDTO estudiante) {
         EstudianteDTO estudianteDTO = null;
+        if (estudiante.getId() != null) {
+			final Boolean bandera = this.estudianteRepository.existsById(estudiante.getId());
+			if (bandera) {
+				EntidadYaExisteException objException = new EntidadYaExisteException(
+						"Cliente con id " + estudiante.getId() + " existe en la BD");
+				throw objException;
+
+			}
+		}
 
         System.out.println("invocando al metodo crear estudiante");
         Estudiante objEstudiante = this.modelMapper.map(estudiante, Estudiante.class);
@@ -40,7 +57,6 @@ public class EstudianteServiceImpl implements IEstudianteService {
         objEstudiante.getTelefonos().forEach(telefono -> telefono.setObjEstudiante(objEstudiante));
         Estudiante estudianteEntity = this.estudianteRepository.save(objEstudiante);
         estudianteDTO = this.modelMapper.map(estudianteEntity, EstudianteDTO.class);
-        System.out.println("Estudiante Creado!");
         return estudianteDTO;
     }
 
@@ -131,5 +147,23 @@ public class EstudianteServiceImpl implements IEstudianteService {
         }
         EstudianteDTO estudianteDTO = mapperLazy.map(estudiante.get(), EstudianteDTO.class);
         return estudianteDTO;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EstudianteDTO> buscarPorPatron(String patron){
+        System.out.println("Invocando al metodo buscar estudiantes por patron");
+        //estudianteRepository.buscarEstudiantePorPatron(patron);
+        //List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
+        //return estudiantesDTO;
+        return null;
+        /*
+         * System.out.println("Invocando al metodo obtener todos los estudiantes");
+        Iterable<Estudiante> estudiante = this.estudianteRepository.findAll();
+        List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiante,
+                new TypeToken<List<EstudianteDTO>>() {
+                }.getType());
+        return estudiantesDTO;
+         */
     }
 }

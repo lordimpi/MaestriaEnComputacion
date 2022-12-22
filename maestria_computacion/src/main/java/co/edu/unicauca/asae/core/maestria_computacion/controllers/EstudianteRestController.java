@@ -3,6 +3,8 @@ package co.edu.unicauca.asae.core.maestria_computacion.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService.IEstudianteService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -34,11 +37,13 @@ public class EstudianteRestController {
         return estudianteService.getEstudianteById(id);
     }
 
+
     @PostMapping("/estudiantes")
-    public EstudianteDTO create(@RequestBody EstudianteDTO estudiante) {
+    public ResponseEntity<EstudianteDTO> create(@Valid @RequestBody EstudianteDTO estudiante) {
         EstudianteDTO objEstudiante = null;
         objEstudiante = estudianteService.createEstudiante(estudiante);
-        return objEstudiante;
+        ResponseEntity<EstudianteDTO> objRespuesta = new ResponseEntity<EstudianteDTO>(objEstudiante, HttpStatus.CREATED);
+		return objRespuesta;
     }
 
     @DeleteMapping("/estudiantes/{id}")
@@ -69,5 +74,10 @@ public class EstudianteRestController {
     @GetMapping("/estudiantes/lazy/{id}")
     public EstudianteDTO showLazy(@PathVariable Integer id){
         return estudianteService.getByIdLazy(id);
+    }
+
+    @GetMapping("/estudiantes/buscarporpatron/{patron}")
+    public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron){
+        return estudianteService.buscarPorPatron(patron);
     }
 }
