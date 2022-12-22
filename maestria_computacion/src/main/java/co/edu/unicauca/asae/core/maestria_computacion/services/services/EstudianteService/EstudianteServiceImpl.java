@@ -47,11 +47,11 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Transactional()
     public EstudianteDTO createEstudiante(@Valid EstudianteDTO estudiante) {
         
-        if(estudiante.getCorreoElectronico() == null || estudiante.getTelefonos().size() < 2){
-            throw new ErrorAlmacenamientoDBException("El correo ya existe. No se puede registrar el estudiante");
+        if(this.existByEmail(estudiante.getCorreoElectronico()) || estudiante.getTelefonos().size() < 2){
+            throw new ErrorAlmacenamientoDBException("El correo ya existe. O telefonos no son suficientes");
         }
 
-        if(estudianteRepository.buscarPorNumeroyTipoIdentificacion(estudiante.getNoId(), estudiante.getTipoIdentificacion()) == null){
+        if(estudianteRepository.buscarPorNumeroyTipoIdentificacion(estudiante.getNoId(), estudiante.getTipoIdentificacion()) != null){
             throw new ErrorAlmacenamientoDBException("No se puede registrar el estudiante. Ya existe un estudiante con el mismo numero de identificacion");
         }
 
@@ -167,19 +167,25 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<EstudianteDTO> buscarPorPatron(String patron) {
+    public List<EstudianteDTO> buscarPorPatron(String patron){
         System.out.println("Invocando al metodo buscar estudiantes por patron");
-        
+        /*Collection<Estudiante> estudiantes = estudianteRepository.buscarEstudiantePorPatron(patron);
+        List<Estudiante> estudiantesList = new ArrayList<>(estudiantes);
+        for (Estudiante estudiante : estudiantes) {
+            System.out.println(estudiante.getNombres());
+        }
+        List<EstudianteDTO> estudiantesDTO = modelMapper.map(estudiantesList,new TypeToken<List<EstudianteDTO>>() {}.getType());
+        System.out.println(estudiantesDTO.size());
+        return estudiantesDTO; */
         List<Estudiante> estudiantes = estudianteRepository.buscarEstudiantePorPatron(patron);
         System.out.println(estudiantes.size());
-        List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes, new TypeToken<List<EstudianteDTO>>() {
-        }.getType());
+        List<EstudianteDTO> estudiantesDTO = mapperLazy.map(estudiantes,new TypeToken<List<EstudianteDTO>>() {}.getType());
         return estudiantesDTO;
     }
 
     @Override
     public boolean existByEmail(String email) {
-        return (estudianteRepository.existByEmail(email).orElse(0) == 1) ? true : false;
+        return (estudianteRepository.existByEmail(email).orElse(0) >= 1) ? true : false;
     }
 
     @Override

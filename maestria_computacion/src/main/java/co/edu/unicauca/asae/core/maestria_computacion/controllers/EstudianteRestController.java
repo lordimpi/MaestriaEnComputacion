@@ -87,6 +87,7 @@ public class EstudianteRestController {
         return estudianteService.existByEmail(email);
     }
 
+    @GetMapping("/estudiantes/buscarporpatron/{patron}")
     public List<EstudianteDTO> buscarPorPatron(@PathVariable String patron){
         System.out.println(patron);
         return estudianteService.buscarPorPatron(patron);
