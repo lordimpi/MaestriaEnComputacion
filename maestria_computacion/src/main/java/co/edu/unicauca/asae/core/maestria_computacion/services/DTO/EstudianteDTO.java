@@ -30,8 +30,8 @@ public class EstudianteDTO extends PersonaDTO {
     private Date fechaIngreso;
 
     @Valid
-    private List<Telefono> telefonos;
+    private List<TelefonoDTO> telefonos;
 
     @Valid
-    private Direccion objDireccion;
+    private DireccionDTO objDireccion;
 }
