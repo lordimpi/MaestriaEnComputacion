@@ -2,8 +2,7 @@ package co.edu.unicauca.asae.core.maestria_computacion.services.DTO;
 import java.util.Date;
 import java.util.List;
 
-import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
-import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -30,8 +29,8 @@ public class EstudianteDTO extends PersonaDTO {
     private Date fechaIngreso;
 
     @Valid
-    private List<Telefono> telefonos;
+    private List<TelefonoDTO> telefonos;
 
     @Valid
-    private Direccion objDireccion;
+    private DireccionDTO objDireccion;
 }

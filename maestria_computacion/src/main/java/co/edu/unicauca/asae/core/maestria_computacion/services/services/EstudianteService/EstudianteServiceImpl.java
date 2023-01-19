@@ -1,7 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService;
 
-import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -209,5 +208,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
         EstudianteResponseRest response = new EstudianteResponseRest();
         response.getEstudianteResponse().getEstudiantes().add(objEstudiante);
         return new ResponseEntity<EstudianteResponseRest>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public List<EstudianteDTO> findAllporids(List<Integer> ids) {
+        List<Estudiante> estudiantes = this.estudianteRepository.findAllporid(ids);
+        List<EstudianteDTO> listas = modelMapper.map(estudiantes, new TypeToken<List<EstudianteDTO>>() {
+        }.getType());
+        return listas;
     }
 }
