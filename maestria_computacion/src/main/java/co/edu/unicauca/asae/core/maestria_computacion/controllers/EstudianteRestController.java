@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteResponse.EstudianteResponseRest;
@@ -20,9 +21,8 @@ import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO
 import co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService.IEstudianteService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+
 
 @RestController
 @RequestMapping("/api")
@@ -38,8 +38,16 @@ public class EstudianteRestController {
     }
 
     @GetMapping("/estudiantes/{id}")
-    public EstudianteDTO show(@PathVariable Integer id) {
-        return estudianteService.getEstudianteById(id);
+    public ResponseEntity<EstudianteDTO> show(@PathVariable Integer id) {
+        EstudianteDTO estudianteActual = estudianteService.getEstudianteById(id);
+        if (estudianteActual != null)
+        {
+            return new ResponseEntity<EstudianteDTO>(estudianteActual,HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<EstudianteDTO>(estudianteActual, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/estudiantes")
@@ -52,23 +60,32 @@ public class EstudianteRestController {
     }
 
     @DeleteMapping("/estudiantes/{id}")
-    public Boolean delete(@PathVariable Integer id) {
+    public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
         Boolean bandera = false;
         EstudianteDTO estudianteActual = estudianteService.getEstudianteById(id);
         if (estudianteActual != null) {
             bandera = estudianteService.deleteEstudiante(id);
+            return new ResponseEntity<Boolean>(bandera,HttpStatus.OK);
         }
-        return bandera;
+        else{
+            return new ResponseEntity<Boolean>(bandera, HttpStatus.NOT_FOUND);
+        }
+        
     }
 
     @PutMapping("/estudiantes/{id}")
-    public EstudianteDTO update(@RequestBody EstudianteDTO estudiante, @PathVariable Integer id) {
+    public ResponseEntity<EstudianteDTO> update(@RequestBody EstudianteDTO estudiante, @PathVariable Integer id) {
         EstudianteDTO objEstudiante = null;
         EstudianteDTO estudianteActual = estudianteService.getEstudianteById(id);
         if (estudianteActual != null) {
             objEstudiante = estudianteService.updateEstudiante(id, estudiante);
+            return new ResponseEntity<EstudianteDTO>(objEstudiante,HttpStatus.OK);
         }
-        return objEstudiante;
+        else
+        {           
+            return new ResponseEntity<EstudianteDTO>(objEstudiante, HttpStatus.NOT_FOUND);
+            
+        }
     }
 
     @GetMapping("/estudiantes/lazy")
@@ -94,11 +111,19 @@ public class EstudianteRestController {
     }
 
     @GetMapping("/estudiantes/{id1}/{id2}")
-    public List<EstudianteDTO> showRangoEstudiantes(@PathVariable Integer id1, @PathVariable Integer id2) {
+    public ResponseEntity<List<EstudianteDTO>> showRangoEstudiantes(@PathVariable Integer id1, @PathVariable Integer id2) {
         List<EstudianteDTO> lista = null;
-        System.out.println("Buscando en el rango: " + id1 + " y " + id2);
+        System.out.println("Buscando en el rango: " + id1 + " y " + id2);        
         lista = estudianteService.findByIdPorRango(id1, id2);
-        return lista;
+        if(lista.isEmpty())
+        {
+            return new ResponseEntity<List<EstudianteDTO>>(lista,HttpStatus.NOT_FOUND); 
+        }
+        else
+        {
+            return new ResponseEntity<List<EstudianteDTO>>(lista,HttpStatus.OK);
+        }
+        
     }
 
     @GetMapping("/estudiantes/buscarpornumeroytipo/{numero}/{tipo}")
@@ -106,4 +131,30 @@ public class EstudianteRestController {
 		ResponseEntity<EstudianteResponseRest> response = this.estudianteService.buscarPorNumeroyTipoIdentificacion(numero, tipo);
 		return response;
 	}
+
+    @GetMapping("/estudiantes/ids")    
+    public ResponseEntity<List<EstudianteDTO>> encontrarestudiantesporids(@PathVariable @RequestParam("ids") @RequestBody List<Integer> ids){
+        ids.forEach(System.out::println);
+        List<EstudianteDTO> estudiantes = this.estudianteService.findAllporids(ids);
+        if(estudiantes.isEmpty()){
+            return new ResponseEntity<List<EstudianteDTO>>(estudiantes, HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<List<EstudianteDTO>>(estudiantes,HttpStatus.OK);
+        }        
+    }
+
+    @GetMapping("/estudiantes/ids2/{ids}")
+    public ResponseEntity<List<EstudianteDTO>> encontrarporids(@PathVariable List<Integer> ids){
+        ids.forEach(System.out::println);        
+        List<EstudianteDTO> estudiantes = this.estudianteService.findAllporids(ids);
+        if(estudiantes.isEmpty())
+        {
+            return new ResponseEntity<List<EstudianteDTO>>(estudiantes, HttpStatus.NOT_FOUND);
+        } 
+        else
+        {
+            return new ResponseEntity<List<EstudianteDTO>>(estudiantes,HttpStatus.OK);
+        }
+    }
 }
