@@ -24,4 +24,26 @@ export class EstudianteComponent {
       }
     );
   }
+  delete(estudiante: Estudiante): void {
+    Swal.fire({
+      title: 'Estas seguro?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Si,eliminar`,
+      denyButtonText: `No, cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.servicio.delete(estudiante.id).subscribe(
+          response => {
+            this.estudiantes = this.estudiantes.filter(cli => cli != estudiante)
+            Swal.fire('Estudiante eliminado!',
+              `Estudiante ${estudiante.nombres} eliminado con éxito`, 'success')
+          }
+        )
+      } else if (result.isDenied) {
+        Swal.fire('Cancelada eliminación', '', 'info')
+      }
+    })
+  }
 }
