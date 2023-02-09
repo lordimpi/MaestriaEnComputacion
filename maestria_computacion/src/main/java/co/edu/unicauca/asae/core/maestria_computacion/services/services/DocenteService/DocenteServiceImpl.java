@@ -2,14 +2,15 @@ package co.edu.unicauca.asae.core.maestria_computacion.services.services.Docente
 
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
+import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.DocenteRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.response.DocenteResponseRest;
+import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.DocenteDTO;
-
 import java.util.List;
-
 import org.modelmapper.TypeToken;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,18 +56,46 @@ public class DocenteServiceImpl implements IDocenteService {
 
     @Override
     public DocenteDTO getDocenteById(Integer id) {
-        return null;
+        System.out.println("Invocando al metodo buscar docente por id: " + id);
+        Docente docente = docenteRepository.findById(id).orElse(null);
+        if (docente == null) {
+            System.out.println("No exisite el docente con id: "+id);
+            throw new EntidadNoExisteException("No existe el docente con id: " + id);
+        }
+        DocenteDTO docenteDTO = modelMapper.map(docente, DocenteDTO.class);
+        return docenteDTO;
     }
 
     @Override
     public DocenteDTO upDocenteDTO(Integer id, DocenteDTO docente) {
-        return null;
+        System.out.println("Invocando al metodo actualizar docente");
+        Docente objDocente = docenteRepository.findById(id).orElse(null);
+        DocenteDTO docenteDTO = null;
+        if (objDocente != null) {
+            objDocente.setNombres(docente.getNombres());
+            objDocente.setApellidos(docente.getApellidos());
+            List<Asignatura> asignaturas = modelMapper.map(docente.getAsignaturas(),
+                new TypeToken<List<Asignatura>>() {}.getType());
+            objDocente.setAsignaturas(asignaturas);
+            objDocente.setSalario(docente.getSalario());
+            objDocente.setTipoIdentificacion(docente.getTipoIdentificacion());
+            objDocente.setTipoDocente(docente.getTipoDocente());
+            objDocente.setNoId(docente.getNoId());
+            objDocente.setUniversidad(docente.getUniversidad());
+        }
+
+        return docenteDTO;
     }
     
     @Override
     public boolean deleteDocente(int id) {
-        // TODO Auto-generated method stub
-        return false;
+        System.out.println("Invocando al metodo eliminar docente");
+        Docente docente = docenteRepository.findById(id).orElse(null);
+        if (docente != null) {
+            docenteRepository.delete(docente);
+            return true;
+        }
+        throw new EntidadNoExisteException("No existe el docente con id: " + id);
     }
 
     @Override
