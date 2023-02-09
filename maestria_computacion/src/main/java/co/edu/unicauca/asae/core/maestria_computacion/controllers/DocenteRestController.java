@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import jakarta.validation.Valid;
 @Validated
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DocenteRestController {
     @Autowired
     private IDocenteService docenteService;
@@ -37,9 +39,11 @@ public class DocenteRestController {
     }
 
     @GetMapping("/docentes/buscarpornumeroytipo/{numero}/{tipo}")
-	public ResponseEntity<DocenteResponseRest> buscarPorNumeroyTipo(@PathVariable String numero, @PathVariable String tipo) {
-		ResponseEntity<DocenteResponseRest> response = this.docenteService.buscarPorNumeroyTipoIdentificacion(numero, tipo);
-		return response;
-	}
+    public ResponseEntity<DocenteResponseRest> buscarPorNumeroyTipo(@PathVariable String numero,
+            @PathVariable String tipo) {
+        ResponseEntity<DocenteResponseRest> response = this.docenteService.buscarPorNumeroyTipoIdentificacion(numero,
+                tipo);
+        return response;
+    }
 
 }
