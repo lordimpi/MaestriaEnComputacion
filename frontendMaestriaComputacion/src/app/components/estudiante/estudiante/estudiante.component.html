@@ -1,0 +1,40 @@
+<div class="container mt-3">
+    <button class="btn btn-outline-info">agregar</button>
+    <table class="table table-sm table-dark table-striped table-hover mt-1">
+        <thead>
+        <th>Id</th>
+        <th>Identificacion</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Correo electronico</th>
+        <th>Fecha Ingreso</th>
+        <th>Acciones</th>
+        </thead>
+        <tbody class="table-group-divider" *ngFor="let estudiante of estudiantes">
+                <tr>
+                    <td>
+                        {{estudiante.id}}
+                    </td>
+                    <td>
+                        {{estudiante.noId}}
+                    </td>
+                    <td>
+                        {{estudiante.nombres}}
+                    </td>
+                    <td>
+                        {{estudiante.apellidos}}
+                    </td>
+                    <td>
+                        {{estudiante.correoElectronico}}
+                    </td>
+                    <td>
+                        {{estudiante.fechaIngreso}}
+                    </td>
+                    <td>
+                        <a  class="btn btn-outline-success">Editar</a>
+                        <a  class="btn btn-outline-danger">Eliminar</a>
+                    </td>
+                </tr> 
+        </tbody>
+    </table>
+</div>

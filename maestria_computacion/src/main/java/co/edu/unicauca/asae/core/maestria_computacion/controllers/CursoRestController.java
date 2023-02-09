@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +20,9 @@ import co.edu.unicauca.asae.core.maestria_computacion.services.services.CursoSer
 @RestController
 @RequestMapping("/api")
 @Validated
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CursoRestController {
-    
+
     @Autowired
     private ICursoService cursoService;
 
@@ -47,7 +49,7 @@ public class CursoRestController {
     public CursoDTO update(@RequestBody CursoDTO curso, @PathVariable Integer id) {
         CursoDTO cursoDTO = null;
         CursoDTO cursoActual = cursoService.getCursoById(id);
-        
+
         if (cursoActual != null) {
             cursoDTO = cursoService.updateCurso(id, cursoDTO);
         }
