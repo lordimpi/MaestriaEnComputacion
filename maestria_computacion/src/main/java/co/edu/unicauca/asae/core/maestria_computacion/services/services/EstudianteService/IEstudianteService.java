@@ -1,6 +1,6 @@
 package co.edu.unicauca.asae.core.maestria_computacion.services.services.EstudianteService;
 
-import java.util.Collection;
+
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -31,4 +31,6 @@ public interface IEstudianteService {
     public List<EstudianteDTO> findByIdPorRango(int id1, int id2);
     
     public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo);
+
+    public List<EstudianteDTO> findAllporids(List<Integer> ids);
 }

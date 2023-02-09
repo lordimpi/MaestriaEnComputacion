@@ -32,4 +32,10 @@ public interface EstudianteRepository extends CrudRepository<Estudiante, Integer
 			@Param("numero") String noIdentificacion,
             @Param("tipo") String tipoIdentificacion);  
 
+
+
+@Query(value = "SELECT e FROM Estudiante e WHERE e.id IN :ids")
+public List<Estudiante> findAllporid(@Param("ids") Collection<Integer> ids);
+
+
 }

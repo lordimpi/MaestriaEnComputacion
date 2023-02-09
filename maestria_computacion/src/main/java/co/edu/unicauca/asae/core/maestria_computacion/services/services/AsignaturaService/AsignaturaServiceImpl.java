@@ -7,12 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadNoExisteException;
-import co.edu.unicauca.asae.core.maestria_computacion.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Asignatura;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Curso;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Docente;
