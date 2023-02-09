@@ -15,6 +15,8 @@ import { AsignaturaComponent } from './components/asignatura/asignatura/asignatu
 import { CursoComponent } from './components/curso/curso/curso.component';
 import { DocenteComponent } from './components/docente/docente/docente.component';
 import { FormularioComponent } from './components/estudiante/formulario/formulario.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent],
@@ -26,6 +28,8 @@ import { FormularioComponent } from './components/estudiante/formulario/formular
     BrowserAnimationsModule,
     HttpClientModule,
     TabMenuModule,
+    NgbModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
