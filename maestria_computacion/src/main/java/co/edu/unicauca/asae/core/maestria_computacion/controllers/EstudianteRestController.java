@@ -129,13 +129,6 @@ public class EstudianteRestController {
     }
 
     @GetMapping("/estudiantes/buscarpornumeroytipo/{numero}/{tipo}")
-<<<<<<< HEAD
-    public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipo(@PathVariable String numero,
-            @PathVariable String tipo) {
-        ResponseEntity<EstudianteResponseRest> response = this.estudianteService
-                .buscarPorNumeroyTipoIdentificacion(numero, tipo);
-        return response;
-=======
 	public ResponseEntity<EstudianteResponseRest> buscarPorNumeroyTipo(@PathVariable String numero, @PathVariable String tipo) {
 		ResponseEntity<EstudianteResponseRest> response = this.estudianteService.buscarPorNumeroyTipoIdentificacion(numero, tipo);
 		return response;
@@ -165,6 +158,6 @@ public class EstudianteRestController {
         {
             return new ResponseEntity<List<EstudianteDTO>>(estudiantes,HttpStatus.OK);
         }
->>>>>>> 086244d3fbfc21319b681da3e38ef455e2f9285e
     }
+    
 }

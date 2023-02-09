@@ -14,9 +14,10 @@ import { EstudianteComponent } from './components/estudiante/estudiante/estudian
 import { AsignaturaComponent } from './components/asignatura/asignatura/asignatura.component';
 import { CursoComponent } from './components/curso/curso/curso.component';
 import { DocenteComponent } from './components/docente/docente/docente.component';
+import { FormularioComponent } from './components/estudiante/formulario/formulario.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
