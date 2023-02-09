@@ -1,40 +1,96 @@
 <div class="container mt-3">
     <button class="btn btn-outline-info">agregar</button>
-    <table class="table table-sm table-dark table-striped table-hover mt-1">
+    <table class="table table table-striped table-hover mt-1">
         <thead>
-        <th>Id</th>
-        <th>Identificacion</th>
-        <th>Nombres</th>
-        <th>Apellidos</th>
-        <th>Correo electronico</th>
-        <th>Fecha Ingreso</th>
-        <th>Acciones</th>
+            <th>Id</th>
+            <th>Identificacion</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Correo electronico</th>
+            <th>Fecha Ingreso</th>
+            <th>Telefonos</th>
+            <th>Direccion</th>
+            <th>Acciones</th>
         </thead>
         <tbody class="table-group-divider" *ngFor="let estudiante of estudiantes">
-                <tr>
-                    <td>
-                        {{estudiante.id}}
-                    </td>
-                    <td>
-                        {{estudiante.noId}}
-                    </td>
-                    <td>
-                        {{estudiante.nombres}}
-                    </td>
-                    <td>
-                        {{estudiante.apellidos}}
-                    </td>
-                    <td>
-                        {{estudiante.correoElectronico}}
-                    </td>
-                    <td>
-                        {{estudiante.fechaIngreso}}
-                    </td>
-                    <td>
-                        <a  class="btn btn-outline-success">Editar</a>
-                        <a  class="btn btn-outline-danger">Eliminar</a>
-                    </td>
-                </tr> 
+            <tr>
+                <td>
+                    {{estudiante.id}}
+                </td>
+                <td>
+                    {{estudiante.noId}}
+                </td>
+                <td>
+                    {{estudiante.nombres}}
+                </td>
+                <td>
+                    {{estudiante.apellidos}}
+                </td>
+                <td>
+                    {{estudiante.correoElectronico}}
+                </td>
+                <td>
+                    {{estudiante.fechaIngreso}}
+                </td>
+                <td>
+                    <button class="btn btn-outline-info" *ngIf="estudiante.telefonos.length > 0"
+                        (click)="abrirModalTelefonos(estudiante.telefonos)">telefonos</button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-info" (click)="abrirModalDireccion(estudiante.objDireccion)">direccion</button>
+                </td>
+                <td>
+                    <a class="btn btn-outline-success">Editar</a>
+                    <button type="button" name="eliminar" (click)='delete(estudiante)' class="btn btn-outline-danger">Eliminar</button>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
+
+<p-dialog header="Telefonos" [(visible)]="showTelefonos">
+    <table class="table table table-striped table-hover mt-1">
+        <thead>
+            <th>
+                Id
+            </th>
+            <th>
+                Numero
+            </th>
+            <th>
+                Tipo
+            </th>
+        </thead>
+        <tbody *ngFor="let telefono of auxTelefonos" class="table-group-divider">
+            <tr>
+                <td>
+                    {{telefono.id}}
+                </td>
+                <td>
+                    {{telefono.numero}}
+                </td>
+                <td>
+                    {{telefono.tipo}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</p-dialog>
+<p-dialog header="Direccion" [(visible)]="showDireccion">
+    <table class="table table table-striped table-hover mt-1">
+        <tbody>
+            <tr>
+                <td><h5>Id</h5></td> <td>{{auxDireccion.idDireccion}}</td>
+            </tr>
+            <tr>
+                <td><h5>Direccion</h5></td> <td>{{auxDireccion.direccionResidencia}}</td>
+            </tr>
+            <tr>
+                <td><h5>Ciudad</h5></td> <td>{{auxDireccion.ciudad}}</td>
+            </tr>
+            <tr>
+                <td><h5>Pais</h5></td> <td>{{auxDireccion.pais}}</td>
+            </tr>
+        </tbody>
+    </table>
+</p-dialog>

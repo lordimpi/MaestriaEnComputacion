@@ -66,5 +66,4 @@ public class CursoRestController {
         }
         return result;
     }
-
 }
