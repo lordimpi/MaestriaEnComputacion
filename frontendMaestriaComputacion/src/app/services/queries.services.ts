@@ -59,4 +59,11 @@ export class QueriesService {
           { headers: this.httpHeaders }
         )
     }
+  
+    existByEmail(email: string): Observable<any> {
+      return this.http.get(
+          `${this.apiEstudiante}/existByEmail/${email}`,
+          { headers: this.httpHeaders }
+        )
+    }
 }
