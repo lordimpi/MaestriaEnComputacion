@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-6">
+        <app-queries></app-queries>
+    </div>
+    <div class="col-6">
+        <!--input para capturar datos y enviar-->
+        <div class="container mt-3 mb-3 card text-bg-dark" style="width: 35rem;">
+            <div class="card-title">
+                <h4 class="text-center text-white mt-3">Buscar estudiante por un patron</h4>
+            </div>
+            <div class="card-body">
+                
+                <div class="input-group mb-3">
+                    <div class="form-floating">
+                        <!--el ngModel debe corresponder a la variable que capturara el dato en ts-->
+                        <input type="text" class="form-control text-bg-dark" placeholder="patron de busqueda" aria-describedby="button-addon2" id="floatingInput" [(ngModel)]="patron">
+                        <label for="floatingInput">Patron de busqueda</label>
+                    </div>
+                    <!--al hacer clic ejecuta la funcion-->
+                    <button class="btn btn-outline-success" type="submit" id="button-addon2" (click)="buscarPatron()">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--una ventana emergente-->
+<!--visible debe estar asignada a la varible de typescrip que habilite o desabilite la ventana, bandera-->
+<p-dialog header="Estudiantes" [(visible)]="showEstudiantes">
+    <!--toma los datos de ts y muestralos-->
+    <!-- en mi caso pueden ser varios asi que es una lista, no tiene que se necesariamente de esta forma-->
+    <table class="table table table-striped table-hover mt-1">
+        <thead>
+            <th>
+                Id
+            </th>
+            <th>
+                Identificacion
+            </th>
+            <th>
+                tipoIdentificacion
+            </th>
+            <th>
+                nombres
+            </th>
+            <th>
+                apellidos
+            </th>
+            <th>
+                correoElectronico
+            </th>
+            <th>
+                fechaIngreso
+            </th>
+        </thead>
+        <tbody *ngFor="let estudiante of estudiantes" class="table-group-divider">
+            <tr>
+                <td>
+                    {{estudiante.id}}
+                </td>
+                <td>
+                    {{estudiante.noId}}
+                </td>
+                <td>
+                    {{estudiante.tipoIdentificacion}}
+                </td>
+                <td>
+                    {{estudiante.nombres}}
+                </td>
+                <td>
+                    {{estudiante.apellidos}}
+                </td>
+                <td>
+                    {{estudiante.correoElectronico}}
+                </td>
+                <td>
+                    {{estudiante.fechaIngreso}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</p-dialog>

@@ -19,9 +19,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {DialogModule} from 'primeng/dialog';
 import { QueriesComponent } from './components/queries/queries.component';
 import { BuscarDocenteComponent } from './components/queries/buscar-docente/buscar-docente.component';
+import { BuscarEstudiantePatronComponent } from './components/queries/buscar-estudiante-patron/buscar-estudiante-patron.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent, QueriesComponent, BuscarDocenteComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent, QueriesComponent, BuscarDocenteComponent, BuscarEstudiantePatronComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +32,7 @@ import { BuscarDocenteComponent } from './components/queries/buscar-docente/busc
     HttpClientModule,
     TabMenuModule,
     NgbModule,
-    DialogModule
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

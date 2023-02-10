@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class QueriesService {
   private api = 'http://localhost:8081/api/docentes';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   buscarPorNumeroyTipo(numIdentifiacion: string,tipoIdentificacion: string
   ): Observable<Docente> {
@@ -21,5 +21,25 @@ export class QueriesService {
         { headers: this.httpHeaders }
       )
       .pipe(map((res) => res as Docente));
+  }
+
+  /**
+   * 
+   * @param patron patron de busqueda para nombre o apellido
+   * @returns una lista de objetos estudiantes (estos seran observables), o un error en caso de fallo
+   */
+  buscarEstudiantePatron(patron: string): Observable<Estudiante[]> {
+    return this.http.get<Estudiante[]>(`${this.api}/buscarporpatron/${patron}`).pipe(
+      //para este caso es una lista asi que se una un mapeo de la respuesta a una array estudiante
+      //si no es una lista, no es necesario hacer esto.
+      map((res) => res as Estudiante[]),
+      //el segundo argumento del pipe, es un catch error, si falla el proceso hay que reportarlo
+      catchError(
+        e => {
+          console.error(e.error.mensaje);
+          Swal.fire('Error al editar', "no se pudo obtener un estudiante", 'error');
+           return throwError(() => new Error(e));
+      })
+    );;
   }
 }
