@@ -34,6 +34,11 @@ export class HeaderComponent implements OnInit {
         icon: 'pi pi-user',
         routerLink: 'estudiante',
       },
+      {
+        label: 'Queries',
+        icon: 'pi pi-database',
+        routerLink: 'queries',
+      },
     ];
 
     this.activeItem = this.items[2];

@@ -50,7 +50,7 @@ export class EstudianteComponent {
     console.log("telefonos recuperados:",this.auxTelefonos.length);
     this.showTelefonos=true;
   }
-  
+
   abrirModalDireccion(dir: Direccion){
     this.auxDireccion=dir;
     this.showDireccion=true;
