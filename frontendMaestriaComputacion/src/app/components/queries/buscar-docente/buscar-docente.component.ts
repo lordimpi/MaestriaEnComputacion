@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DocenteService } from 'src/app/services/docente.service';
 import {Docente} from 'src/app/components/docente/modelos/Docente';
 import Swal from 'sweetalert2';
 import { QueriesService } from '../../../services/queries.services';
@@ -17,7 +16,7 @@ export class BuscarDocenteComponent {
   constructor(private servicio: QueriesService) {}
 
   public buscarDocente() {
-    this.servicio.buscarPorNumeroyTipo(this.numIdentificacion, this.tipoIdentificacion)
+    this.servicio.buscarDocentePorNumeroyTipo(this.numIdentificacion, this.tipoIdentificacion)
     .subscribe((result) => {
       //this.docente = result;
       console.log(result);
