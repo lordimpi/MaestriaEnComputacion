@@ -15,6 +15,7 @@ import { AsignaturaComponent } from './components/asignatura/asignatura/asignatu
 import { CursoComponent } from './components/curso/curso/curso.component';
 import { DocenteComponent } from './components/docente/docente/docente.component';
 import { FormularioComponent } from './components/estudiante/formulario/formulario.component';
+<<<<<<< HEAD
 import { CrearComponent } from './components/asignatura/asignatura/pages/crear/crear.component';
 import { TabViewModule } from 'primeng/tabview';
 import { ToggleButtonModule } from 'primeng/togglebutton';
@@ -22,6 +23,10 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ListarComponent } from './components/asignatura/asignatura/pages/listar/listar.component';
+=======
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DialogModule} from 'primeng/dialog';
+>>>>>>> 68d4db4aa7b9989cdec834ed749bac2070319314
 
 @NgModule({
   declarations: [
@@ -44,11 +49,16 @@ import { ListarComponent } from './components/asignatura/asignatura/pages/listar
     BrowserAnimationsModule,
     HttpClientModule,
     TabMenuModule,
+<<<<<<< HEAD
     TabViewModule,
     ToggleButtonModule,
     TableModule,
     ButtonModule,
     DialogModule,
+=======
+    NgbModule,
+    DialogModule
+>>>>>>> 68d4db4aa7b9989cdec834ed749bac2070319314
   ],
   providers: [],
   bootstrap: [AppComponent],
