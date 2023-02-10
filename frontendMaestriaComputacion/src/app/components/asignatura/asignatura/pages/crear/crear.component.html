@@ -1,0 +1,184 @@
+<div class="container">
+  <h3>Crear Asignatura</h3>
+  <form [formGroup]="asignaturaForm" (ngSubmit)="add()">
+    <ul class="alert alert-danger" *ngIf="errors.length > 0">
+      <li *ngFor="let error of errors">
+        {{ error }}
+      </li>
+    </ul>
+    <div class="dropdown-divider"></div>
+    <div class="field">
+      <span class="p-float-label">
+        <input
+          class="form-control"
+          type="text"
+          pInputText
+          formControlName="name"
+          inputId="name"
+        />
+        <label for="name" *ngIf="!asignaturaForm.value?.name">Nombre: </label>
+        <small
+          class="p-error block"
+          *ngIf="
+            asignaturaForm.get('name')?.invalid &&
+            (asignaturaForm.get('name')?.touched ||
+              asignaturaForm.get('name')?.dirty)
+          "
+        >
+          El Nombre es obligatorio, solo deben contener letras y debe tener un
+          minimo de 5 caracteres y maximo 45.
+        </small>
+      </span>
+    </div>
+    <div class="card field">
+      <div class="field">
+        <p-table [value]="cursos" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="header">
+            <button
+              pButton
+              class="btn btn-outline-primary"
+              (click)="showAddCurso()"
+              type="button"
+            >
+              <i class="pi pi-plus">Agregar curso</i>
+            </button>
+            <tr>
+              <th>Nombre</th>
+              <th>Periodo</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-curso>
+            <tr>
+              <td>{{curso.nombre}}</td>
+              <td>{{curso.periodo}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div class="card field">
+      <div class="field">
+        <p-table [value]="docentes" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="header">
+            <button
+              pButton
+              class="btn btn-outline-primary"
+              (click)="showAddDocente()"
+              type="button"
+              [disabled]="true"
+            >
+              <i class="pi pi-plus">Agregar Docente</i>
+            </button>
+            <tr>
+              <th>Identificación</th>
+              <th>Nombre</th>
+              <th>Universidad</th>
+              <th>Tipo</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-docente>
+            <tr>
+              <td>{{docente.noId}}</td>
+              <td>{{docente.nombres}} {{docente.apellidos}}</td>
+              <td>{{docente.universidad}}</td>
+              <td>{{docente.tipoDocente}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <ul class="alert alert-danger" *ngIf="errors.length > 0">
+      <li *ngFor="let error of errors">
+        {{ error }}
+      </li>
+    </ul>
+
+    <div class="boton" style="text-align: center">
+      <button
+        pButton
+        class="btn btn-outline-primary"
+        type="submit"
+        [disabled]="asignaturaForm.invalid"
+      >
+        Enviar
+      </button>
+    </div>
+  </form>
+</div>
+
+<p-dialog
+  header="Agregar curso"
+  [(visible)]="displayAddCursos"
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '50vw' }"
+>
+  <form class="form-dialog" [formGroup]="cursoForm" (ngSubmit)="addCurso()">
+    <ul class="alert alert-danger" *ngIf="errors.length > 0">
+      <li *ngFor="let error of errors">
+        {{ error }}
+      </li>
+    </ul>
+    <div class="dropdown-divider"></div>
+    <div class="field">
+      <span class="p-float-label">
+        <input
+          class="form-control"
+          type="text"
+          pInputText
+          formControlName="name"
+          inputId="name"
+        />
+        <label for="name" *ngIf="!cursoForm.value?.name">Nombre: </label>
+        <small
+          class="p-error block"
+          *ngIf="
+            cursoForm.get('name')?.invalid &&
+            (cursoForm.get('name')?.touched || cursoForm.get('name')?.dirty)
+          "
+        >
+          El Nombre es obligatorio, su tamaña debe estar entre 5 y 45.
+        </small>
+      </span>
+    </div>
+    <div class="field">
+      <span class="p-float-label">
+        <input
+          class="form-control"
+          type="text"
+          pInputText
+          formControlName="period"
+          inputId="period"
+        />
+        <label for="period" *ngIf="!cursoForm.value?.period">Periodo: </label>
+        <small
+          class="p-error block"
+          *ngIf="
+            cursoForm.get('period')?.invalid &&
+            (cursoForm.get('period')?.touched || cursoForm.get('period')?.dirty)
+          "
+        >
+          El periodo es obligatario y debe ser 1 o 2
+        </small>
+      </span>
+    </div>
+
+    <div class="boton" style="text-align: center">
+      <button
+        pButton
+        class="btn btn-outline-primary"
+        [disabled]="cursoForm.invalid"
+      >
+        Agregar
+      </button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  header="Agregar Docente"
+  [(visible)]="displayAddDocentes"
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '50vw' }"
+>
+</p-dialog>

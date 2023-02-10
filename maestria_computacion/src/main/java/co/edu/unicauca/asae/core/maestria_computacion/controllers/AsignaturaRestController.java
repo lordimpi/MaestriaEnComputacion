@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.maestria_computacion.services.services.AsignaturaService.IAsignturaService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -45,7 +46,7 @@ public class AsignaturaRestController {
     }
 
     @PostMapping("/asignaturas")
-    public AsignaturaDTO create(@RequestBody AsignaturaDTO asignatura) {
+    public AsignaturaDTO create(@Valid @RequestBody AsignaturaDTO asignatura) {
         AsignaturaDTO asignaturaDTO = null;
         asignaturaDTO = asignaturaService.createAsignatura(asignatura);
         return asignaturaDTO;

@@ -15,9 +15,27 @@ import { AsignaturaComponent } from './components/asignatura/asignatura/asignatu
 import { CursoComponent } from './components/curso/curso/curso.component';
 import { DocenteComponent } from './components/docente/docente/docente.component';
 import { FormularioComponent } from './components/estudiante/formulario/formulario.component';
+import { CrearComponent } from './components/asignatura/asignatura/pages/crear/crear.component';
+import { TabViewModule } from 'primeng/tabview';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { ListarComponent } from './components/asignatura/asignatura/pages/listar/listar.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    EstudianteComponent,
+    AsignaturaComponent,
+    CursoComponent,
+    DocenteComponent,
+    FormularioComponent,
+    CrearComponent,
+    ListarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,6 +44,11 @@ import { FormularioComponent } from './components/estudiante/formulario/formular
     BrowserAnimationsModule,
     HttpClientModule,
     TabMenuModule,
+    TabViewModule,
+    ToggleButtonModule,
+    TableModule,
+    ButtonModule,
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
