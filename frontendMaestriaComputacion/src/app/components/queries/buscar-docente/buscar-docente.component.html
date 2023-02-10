@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-6">
+    <app-queries></app-queries>
+  </div>
+  <div class="col-6">
+    <label for="numIdentificacion">Numero de identificación</label>
+    <input type="text" class="form-control" placeholder="Num Identificación" [(ngModel)]="numIdentificacion">
+    <label for="tipoIdentificacion">Tipo de identificación</label>
+    <input type="text" class="form-control" placeholder="Num Identificación" [(ngModel)]="tipoIdentificacion">
+    <button type="button" class="btn btn-primary mb-2" (click)="buscarDocente()">Buscar docente</button>
+    <div>
+        <label for="">Nombres: {{docente.tipoIdentificacion}}</label>
+        <label for="">Apellidos: {{docente.apellidos}}</label>
+        <label for="">Correo {{docente.correoElectronico}}</label>
+        <label for="">Universidad {{docente.universidad}}</label>    
+        <label for="">Tipo {{docente.tipoDocente}}</label>
+        <label for="">Salario {{docente.salario}}</label>
+    </div>
+    </div>
+</div>
+
