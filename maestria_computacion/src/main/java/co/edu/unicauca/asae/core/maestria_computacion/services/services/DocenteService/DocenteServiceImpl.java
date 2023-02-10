@@ -102,6 +102,10 @@ public class DocenteServiceImpl implements IDocenteService {
     public ResponseEntity<DocenteResponseRest> buscarPorNumeroyTipoIdentificacion(String numero, String tipo) {
         System.out.println("Invocando al metodo buscar por numero y tipo de identificación");
 		Docente objEstudiante = this.docenteRepository.buscarPorNumeroyTipoIdentificacion(numero, tipo);  
+        //TODO: construir respuesta si es null
+        /*if(objEstudiante == null){
+            
+        }*/
        	System.out.println("Nombres: " + objEstudiante.getNombres());
 		System.out.println("Apellidos: " + objEstudiante.getApellidos());
 		DocenteResponseRest response = new DocenteResponseRest();

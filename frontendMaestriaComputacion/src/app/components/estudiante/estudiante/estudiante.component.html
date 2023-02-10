@@ -1,8 +1,9 @@
 <div class="container mt-3">
-    <button class="btn btn-outline-info">agregar</button>
+    <button class="btn btn-outline-info" [routerLink]="['/estudiante/formulario']">agregar</button>
     <table class="table table table-striped table-hover mt-1">
         <thead>
             <th>Id</th>
+            <th>Tipo id</th>
             <th>Identificacion</th>
             <th>Nombres</th>
             <th>Apellidos</th>
@@ -16,6 +17,9 @@
             <tr>
                 <td>
                     {{estudiante.id}}
+                </td>
+                <td>
+                    {{estudiante.tipoIdentificacion}}
                 </td>
                 <td>
                     {{estudiante.noId}}
@@ -40,7 +44,8 @@
                     <button class="btn btn-outline-info" (click)="abrirModalDireccion(estudiante.objDireccion)">direccion</button>
                 </td>
                 <td>
-                    <a class="btn btn-outline-success">Editar</a>
+                    <!--'estudiante/actualizar/:id'-->
+                    <a class="btn btn-outline-success" [routerLink]="['/estudiante/actualizar',estudiante.id]">Editar</a>
                     <button type="button" name="eliminar" (click)='delete(estudiante)' class="btn btn-outline-danger">Eliminar</button>
                 </td>
             </tr>

@@ -17,9 +17,15 @@ import { DocenteComponent } from './components/docente/docente/docente.component
 import { FormularioComponent } from './components/estudiante/formulario/formulario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {DialogModule} from 'primeng/dialog';
+import { QueriesComponent } from './components/queries/queries.component';
+import { BuscarDocenteComponent } from './components/queries/buscar-docente/buscar-docente.component';
+import { BuscarEstudiantePatronComponent } from './components/queries/buscar-estudiante-patron/buscar-estudiante-patron.component';
+import { BuscarEstudianteNumIdentificacionComponent } from './components/queries/buscar-estudiante-num-identificacion/buscar-estudiante-num-identificacion.component';
+import { BuscarAsignaturaPorNombreComponent } from './components/queries/buscar-asignatura-por-nombre/buscar-asignatura-por-nombre.component';
+import { BuscarEmailComponent } from './components/queries/buscar-email/buscar-email.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent, QueriesComponent, BuscarDocenteComponent, BuscarEstudiantePatronComponent, BuscarEstudianteNumIdentificacionComponent, BuscarAsignaturaPorNombreComponent, BuscarEmailComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +35,7 @@ import {DialogModule} from 'primeng/dialog';
     HttpClientModule,
     TabMenuModule,
     NgbModule,
-    DialogModule
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
