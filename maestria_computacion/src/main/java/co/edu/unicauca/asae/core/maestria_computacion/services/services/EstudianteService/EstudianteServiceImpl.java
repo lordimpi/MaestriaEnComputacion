@@ -20,6 +20,7 @@ import co.edu.unicauca.asae.core.maestria_computacion.models.Direccion;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Estudiante;
 import co.edu.unicauca.asae.core.maestria_computacion.models.Telefono;
 import co.edu.unicauca.asae.core.maestria_computacion.repositories.EstudianteRepository;
+import co.edu.unicauca.asae.core.maestria_computacion.repositories.TelefonoRepository;
 import co.edu.unicauca.asae.core.maestria_computacion.response.EstudianteResponse.EstudianteResponseRest;
 import co.edu.unicauca.asae.core.maestria_computacion.services.DTO.EstudianteDTO;
 import jakarta.validation.Valid;
@@ -29,6 +30,8 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
+    @Autowired
+    private TelefonoRepository telefonoRepository;
 
     @Autowired
     @Qualifier("estudiante")
@@ -114,6 +117,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
+    @Transactional
     public EstudianteDTO updateEstudiante(Integer id, EstudianteDTO estudiante) {
         Estudiante objEstudianteAlmacenado = this.estudianteRepository.findById(id).orElse(null);
         EstudianteDTO estudianteDTOActualizado = null;
@@ -123,11 +127,12 @@ public class EstudianteServiceImpl implements IEstudianteService {
             objEstudianteAlmacenado.setNoId(estudiante.getNoId());
             objEstudianteAlmacenado.setTipoIdentificacion(estudiante.getTipoIdentificacion());
             Direccion objDireccionAlmacenada = objEstudianteAlmacenado.getObjDireccion();
-            objDireccionAlmacenada
-                    .setDireccionResidencia(estudiante.getObjDireccion().getDireccionResidencia());
+            objDireccionAlmacenada.setDireccionResidencia(estudiante.getObjDireccion().getDireccionResidencia());
             objDireccionAlmacenada.setCiudad(estudiante.getObjDireccion().getCiudad());
             objDireccionAlmacenada.setPais(estudiante.getObjDireccion().getPais());
 
+            // Eliminar los telefonos anteriores
+            telefonoRepository.deleteAll(objEstudianteAlmacenado.getTelefonos());
             List<Telefono> Telefonos = modelMapper.map(estudiante.getTelefonos(),
                     new TypeToken<List<Telefono>>() {
                     }.getType());
