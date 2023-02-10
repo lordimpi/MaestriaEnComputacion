@@ -10,16 +10,16 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class QueriesService {
-  private api = 'http://localhost:8081/api/estudiantes';
+  private api = 'http://localhost:8081/api/docentes';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {}
 
-  buscarPorNumeroyTipoIdentificacion(
-    numIdentifiacion: string,
-    tipoIdentificacion: string
+  buscarPorNumeroyTipo(numIdentifiacion: string,tipoIdentificacion: string
   ): Observable<Docente> {
-    return this.http
-      .get(`${this.api}/${numIdentifiacion}/${tipoIdentificacion}`)
+    return this.http.get<Docente>(
+        `${this.api}/buscarpornumeroytipo/${numIdentifiacion}/${tipoIdentificacion}`,
+        { headers: this.httpHeaders }
+      )
       .pipe(map((res) => res as Docente));
   }
 }

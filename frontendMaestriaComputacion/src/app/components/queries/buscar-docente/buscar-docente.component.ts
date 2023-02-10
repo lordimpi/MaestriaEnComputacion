@@ -17,7 +17,7 @@ export class BuscarDocenteComponent {
   constructor(private servicio: QueriesService) {}
 
   public buscarDocente() {
-    this.servicio.buscarPorNumeroyTipoIdentificacion(this.numIdentificacion, this.tipoIdentificacion)
+    this.servicio.buscarPorNumeroyTipo(this.numIdentificacion, this.tipoIdentificacion)
     .subscribe((result) => {
       this.docente = result;
       if(this.docente == null){
