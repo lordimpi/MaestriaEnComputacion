@@ -29,7 +29,7 @@ import {DialogModule} from 'primeng/dialog';
     HttpClientModule,
     TabMenuModule,
     NgbModule,
-    DialogModule
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

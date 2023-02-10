@@ -1,1 +1,98 @@
-<p>formulario works!</p>
+<div class="container mt-3 mb-3 card text-bg-dark" style="width: 35rem;">
+    <button class="btn btn-outline-primary" (click)="cambiarBandera()"> validaciones: {{banderaValidaciones}} </button>
+    <ul class="alert alert-light mt-3" *ngIf="errores.length>0">
+        <li *ngFor="let err of errores" class="text-dark">
+            {{err}}
+        </li>
+    </ul>
+    <div class="card-title">
+        <h4 class="text-center text-white mt-3">Formulario estudiante</h4>
+    </div>
+    <div class="card-body">
+        <form #estudianteForm="ngForm">
+            <div class="form-floating m-3">
+                <input type="text" class="form-control text-bg-dark" id="floatingInput"
+                    placeholder="Tipo identificacion" name="tipo_id" [(ngModel)]="estudiante.tipoIdentificacion"
+                    #tipoId="ngModel">
+                <label for="floatingInput">Tipo identificacion</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="string" class="form-control text-bg-dark" id="floatingInput"
+                    placeholder="Numero identificacion" name="noId" [(ngModel)]="estudiante.noId" #NoId="ngModel"
+                    required minlength="0">
+                <label for="floatingInput">Numero identificacion</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="string" class="form-control text-bg-dark" id="floatingInput" placeholder="Nombres"
+                    name="Nombres" [(ngModel)]="estudiante.nombres" #nombre="ngModel" required minlength="3"
+                    maxlength="50">
+                <label for="floatingInput">Nombre</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="string" class="form-control text-bg-dark" id="floatingInput" placeholder="Nombres"
+                    name="Apellidos" [(ngModel)]="estudiante.apellidos" #apellido="ngModel" required minlength="3"
+                    maxlength="50">
+                <label for="floatingInput">Apellidos</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="email" class="form-control text-bg-dark" id="floatingInput" placeholder="Nombres"
+                    name="email" [(ngModel)]="estudiante.correoElectronico" #email="ngModel" required>
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="date" class="form-control text-bg-dark" id="floatingInput" placeholder="Nombres"
+                    name="fecha" [(ngModel)]="estudiante.fechaIngreso" #fecha="ngModel" required>
+                <label for="floatingInput">Fecha</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="idTelefono"
+                    name="idTelefono" [(ngModel)]="telefono.id" #idTelefono="ngModel" required>
+                <label for="floatingInput">idTelefono</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="Tipo" name="tipo"
+                    [(ngModel)]="telefono.tipo" #tipoTelefono="ngModel" required>
+                <label for="floatingInput">tipo telefono</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="number" class="form-control text-bg-dark" id="floatingInput"
+                    placeholder="numero telefonico" name="numerotel" [(ngModel)]="telefono.numero" #numeroTel="ngModel"
+                    required>
+                <label for="floatingInput">Numero telefonico</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="direccion"
+                    name="direccion" [(ngModel)]="direccion.direccionResidencia" #direccionResidencia="ngModel"
+                    required>
+                <label for="floatingInput">direccion residencia</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="ciudad"
+                    name="ciudad" [(ngModel)]="direccion.ciudad" #ciudad="ngModel" required>
+                <label for="floatingInput">ciudad</label>
+            </div>
+            <div class="form-floating m-3">
+                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="pais" name="pais"
+                    [(ngModel)]="direccion.pais" #pais="ngModel" required>
+                <label for="floatingInput">pais</label>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-outline-success" (click)="crearEstudiante()"
+                        *ngIf="!estudiante.id else elseBlock" [disabled]="!estudianteForm.form.valid">Crear
+                    </button> <!--[disabled]="!clienteForm.form.valid"-->
+                    <ng-template #elseBlock>
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-outline-success"
+                                (click)="actualizarEstudiante()">Actualizar</button>
+                            <!--[disabled]="!clienteForm.form.valid"-->
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="col text-center">
+                    <button class="btn btn-outline-danger" [routerLink]="['/']">Descartar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
