@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-6">
+      <app-queries></app-queries>
+    </div>
+    <div class="col-6">
+      <div>
+        <label for="nombre">Nombre asignatura</label>
+        <input type="text" class="form-control mb-2" placeholder="Buscar por nombre" [(ngModel)]="nombre">
+        <button type="button" class="btn btn-success mb-2" (click)="buscarAsignaturasPorNombre()">Buscar Asignatura</button>
+      </div>
+    </div>
+  </div>
+
+  <!--una ventana emergente-->
+<!--visible debe estar asignada a la varible de typescrip que habilite o desabilite la ventana, bandera-->
+<p-dialog header="Estudiantes" [(visible)]="showAsignatura">
+  <!--toma los datos de ts y muestralos-->
+  <!-- en mi caso pueden ser varios asi que es una lista, no tiene que se necesariamente de esta forma-->
+  <table class="table table table-striped table-hover mt-1">
+      <thead>
+          <th>
+              Id
+          </th>
+          <th>
+              Nombre
+          </th>
+          <th>
+              Cursos
+          </th>
+          <th>
+              Docentes
+          </th>
+      </thead>
+      <tbody *ngFor="let asignatura of asignaturas" class="table-group-divider">
+          <tr>
+              <td>
+                  {{asignatura.id}}
+              </td>
+              <td>
+                  {{asignatura.nombre}}
+              </td>
+              <td *ngIf="asignatura.cursos != null; else defaultC">
+                  {{asignatura.cursos.length}}
+              </td>
+              <ng-template #defaultC>
+                <td>0</td>
+              </ng-template>
+              <td *ngIf="asignatura.docentes != null; else defaultD">
+                  {{asignatura.docentes.length}}
+              </td>
+              <ng-template #defaultD>
+                <td>0</td>
+              </ng-template>
+          </tr>
+      </tbody>
+  </table>
+</p-dialog>

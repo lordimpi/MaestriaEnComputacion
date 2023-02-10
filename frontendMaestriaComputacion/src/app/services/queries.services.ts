@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class QueriesService {
   private apiDocente = 'http://localhost:8081/api/docentes';
   private apiEstudiante = 'http://localhost:8081/api/estudiantes';
+  private apiAsignatura = 'http://localhost:8081/api/asignaturas';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
@@ -51,4 +52,11 @@ export class QueriesService {
       })
     );;
   }
+
+  likeName(nombre: string): Observable<any> {
+      return this.http.get(
+          `${this.apiAsignatura}/likeName/${nombre}`,
+          { headers: this.httpHeaders }
+        )
+    }
 }
