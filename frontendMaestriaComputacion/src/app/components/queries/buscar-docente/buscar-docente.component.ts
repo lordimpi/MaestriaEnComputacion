@@ -12,6 +12,7 @@ export class BuscarDocenteComponent {
   public numIdentificacion!: string;
   public tipoIdentificacion!: string;
   public docente:Docente = new Docente();
+  showDocente: boolean = false;
 
   constructor(private servicio: QueriesService) {}
 
@@ -19,15 +20,15 @@ export class BuscarDocenteComponent {
     this.servicio.buscarDocentePorNumeroyTipo(this.numIdentificacion, this.tipoIdentificacion)
     .subscribe((result) => {
       //this.docente = result;
-      console.log(result);
       this.docente = result.docenteResponse.docentes[0]||null;
-      console.log(this.docente);
       if(this.docente == null){
         Swal.fire({
           icon: 'error',
           title: 'Sin datos',
           text: 'No se encuentran estudiantes registrados'
         })
+      }else{
+        this.showDocente=true;
       }
     },
     (error)=>{
