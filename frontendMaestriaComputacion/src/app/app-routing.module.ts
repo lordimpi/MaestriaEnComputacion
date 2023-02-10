@@ -8,6 +8,7 @@ import { FormularioComponent } from './components/estudiante/formulario/formular
 import { QueriesComponent } from './components/queries/queries.component';
 import { BuscarDocenteComponent } from './components/queries/buscar-docente/buscar-docente.component';
 import { BuscarEstudiantePatronComponent } from './components/queries/buscar-estudiante-patron/buscar-estudiante-patron.component';
+import { BuscarEstudianteNumIdentificacionComponent } from './components/queries/buscar-estudiante-num-identificacion/buscar-estudiante-num-identificacion.component';
 
 const routes: Routes = [
   { path: 'estudiante', component: EstudianteComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   //poner todos los path antes de esta linea
   { path: 'queries', component: QueriesComponent },
   { path: 'querie1', component: BuscarDocenteComponent },
+  { path: 'querie2', component: BuscarEstudianteNumIdentificacionComponent },
   { path: 'querie3', component: BuscarEstudiantePatronComponent },
   { path: '**', component: EstudianteComponent },
 ];

@@ -20,9 +20,10 @@ import {DialogModule} from 'primeng/dialog';
 import { QueriesComponent } from './components/queries/queries.component';
 import { BuscarDocenteComponent } from './components/queries/buscar-docente/buscar-docente.component';
 import { BuscarEstudiantePatronComponent } from './components/queries/buscar-estudiante-patron/buscar-estudiante-patron.component';
+import { BuscarEstudianteNumIdentificacionComponent } from './components/queries/buscar-estudiante-num-identificacion/buscar-estudiante-num-identificacion.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent, QueriesComponent, BuscarDocenteComponent, BuscarEstudiantePatronComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent, QueriesComponent, BuscarDocenteComponent, BuscarEstudiantePatronComponent, BuscarEstudianteNumIdentificacionComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

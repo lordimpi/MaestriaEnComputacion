@@ -10,19 +10,27 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class QueriesService {
-  private api = 'http://localhost:8081/api/docentes';
+  private apiDocente = 'http://localhost:8081/api/docentes';
   private apiEstudiante = 'http://localhost:8081/api/estudiantes';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
   //TODO: cambiar a docente
-  buscarPorNumeroyTipo(numIdentifiacion: string,tipoIdentificacion: string
+  buscarDocentePorNumeroyTipo(numIdentifiacion: string,tipoIdentificacion: string
   ): Observable<any> {
     return this.http.get(
-        `${this.api}/buscarpornumeroytipo/${numIdentifiacion}/${tipoIdentificacion}`,
+        `${this.apiDocente}/buscarpornumeroytipo/${numIdentifiacion}/${tipoIdentificacion}`,
         { headers: this.httpHeaders }
       )
   }
+
+  buscarEstudiantePorNumeroyTipo(numIdentifiacion: string,tipoIdentificacion: string
+    ): Observable<any> {
+      return this.http.get(
+          `${this.apiEstudiante}/buscarpornumeroytipo/${numIdentifiacion}/${tipoIdentificacion}`,
+          { headers: this.httpHeaders }
+        )
+    }
 
   /**
    * 
