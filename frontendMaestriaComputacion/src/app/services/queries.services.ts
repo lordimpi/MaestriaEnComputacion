@@ -11,16 +11,17 @@ import Swal from 'sweetalert2';
 })
 export class QueriesService {
   private api = 'http://localhost:8081/api/docentes';
+  private apiEstudiante = 'http://localhost:8081/api/estudiantes';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
+  //TODO: cambiar a docente
   buscarPorNumeroyTipo(numIdentifiacion: string,tipoIdentificacion: string
-  ): Observable<Docente> {
-    return this.http.get<Docente>(
+  ): Observable<any> {
+    return this.http.get(
         `${this.api}/buscarpornumeroytipo/${numIdentifiacion}/${tipoIdentificacion}`,
         { headers: this.httpHeaders }
       )
-      .pipe(map((res) => res as Docente));
   }
 
   /**
@@ -29,7 +30,7 @@ export class QueriesService {
    * @returns una lista de objetos estudiantes (estos seran observables), o un error en caso de fallo
    */
   buscarEstudiantePatron(patron: string): Observable<Estudiante[]> {
-    return this.http.get<Estudiante[]>(`${this.api}/buscarporpatron/${patron}`).pipe(
+    return this.http.get<Estudiante[]>(`${this.apiEstudiante}/buscarporpatron/${patron}`).pipe(
       //para este caso es una lista asi que se una un mapeo de la respuesta a una array estudiante
       //si no es una lista, no es necesario hacer esto.
       map((res) => res as Estudiante[]),

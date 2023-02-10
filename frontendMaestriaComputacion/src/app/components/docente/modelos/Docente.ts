@@ -4,7 +4,6 @@ export class Docente{
     tipoIdentificacion!: string;
     nombres!: string;
     apellidos!: string;
-    correoElectronico!: string;
     universidad!: string;
     tipoDocente!: string;
     salario!: number;

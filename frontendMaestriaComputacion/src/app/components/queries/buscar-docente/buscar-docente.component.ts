@@ -19,7 +19,10 @@ export class BuscarDocenteComponent {
   public buscarDocente() {
     this.servicio.buscarPorNumeroyTipo(this.numIdentificacion, this.tipoIdentificacion)
     .subscribe((result) => {
-      this.docente = result;
+      //this.docente = result;
+      console.log(result);
+      this.docente = result.docenteResponse.docentes[0]||null;
+      console.log(this.docente);
       if(this.docente == null){
         Swal.fire({
           icon: 'error',
