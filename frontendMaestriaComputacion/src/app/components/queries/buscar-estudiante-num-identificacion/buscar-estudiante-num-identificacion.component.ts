@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { QueriesService } from 'src/app/services/queries.services';
 import Swal from 'sweetalert2';
+import { Direccion } from '../../estudiante/modelos/Direccion';
 import { Estudiante } from '../../estudiante/modelos/Estudiante';
 
 @Component({
@@ -12,6 +13,7 @@ export class BuscarEstudianteNumIdentificacionComponent {
   public numIdentificacion!: string;
   public tipoIdentificacion!: string;
   public estudiante:Estudiante = new Estudiante();
+  public showEstudiantes: boolean = false;
 
   constructor(private servicio: QueriesService) {}
 
@@ -19,6 +21,7 @@ export class BuscarEstudianteNumIdentificacionComponent {
     this.servicio.buscarEstudiantePorNumeroyTipo(this.numIdentificacion, this.tipoIdentificacion)
     .subscribe((result) => {
       this.estudiante = result.estudianteResponse.estudiantes[0]||null;
+      this.showEstudiantes=true;
       console.log(this.estudiante);
       if(this.estudiante == null){
         Swal.fire({

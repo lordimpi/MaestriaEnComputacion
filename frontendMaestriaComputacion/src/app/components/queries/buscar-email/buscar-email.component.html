@@ -1,20 +1,20 @@
 <div class="row">
-    <div class="col-6">
-      <app-queries></app-queries>
-    </div>
-    <div class="col-6">
-      <div>
-        <label for="nombre">Validar correo</label>
-        <input type="text" class="form-control mb-2" placeholder="Ingrese un correo" [(ngModel)]="correo">
-        <button type="button" class="btn btn-success mb-2" (click)="buscarCorreo()">Validar Correo</button>
-      </div>
+  <div class="col-6">
+    <app-queries></app-queries>
+  </div>
+  <div class="col-6">
+    <div>
+      <label for="nombre">Validar correo</label>
+      <input type="text" class="form-control mb-2" placeholder="Ingrese un correo" [(ngModel)]="correo">
+      <button type="button" class="btn btn-success mb-2" (click)="buscarCorreo()">Validar Correo</button>
     </div>
   </div>
+</div>
 
-  <!--una ventana emergente-->
+<!--una ventana emergente-->
 <!--visible debe estar asignada a la varible de typescrip que habilite o desabilite la ventana, bandera-->
 <p-dialog header="Correos" [(visible)]="showCorreo">
-  <!--toma los datos de ts y muestralos-->
-  <!-- en mi caso pueden ser varios asi que es una lista, no tiene que se necesariamente de esta forma-->
-  <p>{{mensaje}}</p>
+<!--toma los datos de ts y muestralos-->
+<!-- en mi caso pueden ser varios asi que es una lista, no tiene que se necesariamente de esta forma-->
+<p>{{mensaje}}</p>
 </p-dialog>
