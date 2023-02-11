@@ -45,16 +45,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     TabMenuModule,
-<<<<<<< HEAD
     TabViewModule,
     ToggleButtonModule,
     TableModule,
     ButtonModule,
     DialogModule,
-=======
     NgbModule,
-    DialogModule
->>>>>>> 68d4db4aa7b9989cdec834ed749bac2070319314
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
