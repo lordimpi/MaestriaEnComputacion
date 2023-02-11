@@ -1,1 +1,42 @@
-<p>docente works!</p>
+<div class="card">
+  <div class="card-header">
+    <h4>Docentes</h4>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Listado de docentes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-outline-success" type="button" [routerLink]="['/docentes/form']">
+        Crear Docente
+      </button>
+    </div>
+    <div *ngIf="docentes?.length == 0" class="alert alert-info ">
+      No hay docentes registrados
+    </div>
+    <div class="table-responsive " *ngIf="docentes.length > 0">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Número de identificación</th>
+            <th scope="col">Tipo de identificación</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Universidad</th>
+            <th scope="col">Tipo de docente</th>
+            <th scope="col">Salario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let docente of docentes">
+            <td>{{ docente.noId }}</td>
+            <td>{{ docente.tipoIdentificacion }}</td>
+            <td>{{ docente.nombres }}</td>
+            <td>{{ docente.apellidos}}</td>
+            <td>{{ docente.universidad }}</td>
+            <td>{{ docente.tipoDocente }}</td>
+            <td>{{ docente.salario}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
