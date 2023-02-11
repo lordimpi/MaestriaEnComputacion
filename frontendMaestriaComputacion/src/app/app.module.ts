@@ -23,6 +23,12 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ListarComponent } from './components/asignatura/asignatura/pages/listar/listar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QueriesComponent } from './components/queries/queries.component';
+import { BuscarDocenteComponent } from './components/queries/buscar-docente/buscar-docente.component';
+import { BuscarEstudiantePatronComponent } from './components/queries/buscar-estudiante-patron/buscar-estudiante-patron.component';
+import { BuscarEstudianteNumIdentificacionComponent } from './components/queries/buscar-estudiante-num-identificacion/buscar-estudiante-num-identificacion.component';
+import { BuscarAsignaturaPorNombreComponent } from './components/queries/buscar-asignatura-por-nombre/buscar-asignatura-por-nombre.component';
+import { BuscarEmailComponent } from './components/queries/buscar-email/buscar-email.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +42,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormularioComponent,
     CrearComponent,
     ListarComponent,
+    QueriesComponent,
+    BuscarDocenteComponent,
+    BuscarEstudiantePatronComponent,
+    BuscarEstudianteNumIdentificacionComponent,
+    BuscarAsignaturaPorNombreComponent,
+    BuscarEmailComponent,
   ],
   imports: [
     BrowserModule,

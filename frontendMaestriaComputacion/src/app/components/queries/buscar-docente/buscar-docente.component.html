@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-6">
+    <app-queries></app-queries>
+  </div>
+  <div class="col-6">
+    <div>
+      <label for="numIdentificacion">Numero de identificación</label>
+      <input type="text" class="form-control mb-2" placeholder="Num Identificación" [(ngModel)]="numIdentificacion">
+      <label for="tipoIdentificacion">Tipo de identificación</label>
+      <input type="text" class="form-control mb-2" placeholder="Tipo Identificación" [(ngModel)]="tipoIdentificacion">
+      <button type="button" class="btn btn-primary mb-2" (click)="buscarDocente()">Buscar docente</button>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Docente" [(visible)]="showDocente">
+  <tbody>
+    <tr>
+      <td>
+        <label>Identificacion: </label>
+      </td>
+      <td>
+        <label>{{docente.noId}}</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Tipo identificacion: </label>        
+      </td>
+      <td>
+        <label>{{docente.tipoIdentificacion}}</label>    
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        <label>Nombres: </label>
+      </td>
+      <td>
+        <label>{{docente.nombres}}</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Apellidos: </label>
+      </td>
+      <td>
+        <label>{{docente.apellidos}}</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Universidad: </label>
+      </td>
+      <td>
+        <label>{{docente.universidad}}</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Tipo: </label>
+      </td>
+      <td>
+        <label>{{docente.tipoDocente}}</label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Salario: </label>
+      </td>
+      <td>
+        <label>{{docente.salario}}</label>
+      </td>
+    </tr>
+  </tbody>
+</p-dialog>
