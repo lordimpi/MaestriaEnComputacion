@@ -1,0 +1,90 @@
+<button pButton class="btn btn-outline-primary" (click)="ngOnInit()">
+  <i class="pi pi-replay">Recargar</i>
+</button>
+<p-table [value]="asignaturas">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th>
+      <th>Cursos</th>
+      <th>Docentes</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-asignatura>
+    <tr>
+      <td>{{ asignatura.nombre }}</td>
+      <td>
+        <button
+          pButton
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="seeCursos(asignatura.cursos)"
+        >
+          <i class="pi pi-eye"></i>
+        </button>
+      </td>
+      <td>
+        <button
+          pButton
+          [disabled]="true"
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="seeDocentes(asignatura.docentes)"
+        >
+          <i class="pi pi-eye"></i>
+        </button>
+      </td>
+      <td>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          class="p-button-rounded p-button-danger p-button-text"
+          (click)="deleteAsignatura(asignatura.id)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Ver Docentes" [(visible)]="showDocentes">
+  <div class="card">
+    <p-table [value]="docentes" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Identificación</th>
+          <th>Nombre</th>
+          <th>Universidad</th>
+          <th>Tipo</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-docente>
+        <tr>
+          <td>{{docente.noId}}</td>
+          <td>{{docente.nombres}} {{docente.apellidos}}</td>
+          <td>{{docente.universidad}}</td>
+          <td>{{docente.tipoDocente}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-dialog>
+
+<p-dialog header="Ver Cursos" [(visible)]="showCursos">
+  <div class="card">
+    <p-table [value]="cursos" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nombre</th>
+          <th>Periodo</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-curso>
+        <tr>
+          <td>{{curso.nombre}}</td>
+          <td>{{curso.periodo}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-dialog>

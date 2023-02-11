@@ -1,1 +1,8 @@
-<p>asignatura works!</p>
+<p-tabView (onChange)="handleChange($event)" [(activeIndex)]="index" >
+  <p-tabPanel header="Crear" [hidden]="hiddenPages[0]" >
+
+    <app-crear/> </p-tabPanel>
+  <p-tabPanel header="Header 2" [hidden]="hiddenPages[1]">
+    <app-listar></app-listar> </p-tabPanel>
+  <p-tabPanel header="Header 3" [hidden]="hiddenPages[2]"> Content 3 </p-tabPanel>
+</p-tabView>

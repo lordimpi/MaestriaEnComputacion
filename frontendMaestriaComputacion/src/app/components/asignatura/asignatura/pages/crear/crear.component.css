@@ -1,0 +1,15 @@
+.field {
+  display: flex;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 1.5rem;
+}
+
+.form-dialog{
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.card{
+  padding: 1rem;
+}
