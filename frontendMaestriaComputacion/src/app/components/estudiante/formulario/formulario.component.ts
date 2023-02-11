@@ -22,7 +22,7 @@ export class FormularioComponent {
   public estudiante: Estudiante = new Estudiante();
   public telefono: Telefono = new Telefono();
   public direccion: Direccion = new Direccion();
-  public errores: string[] = [];  
+  public errores: string[] = [];
   banderaValidaciones: boolean = true;
   public cantidad=8;
   public showTelefonos: boolean= false;
@@ -72,7 +72,7 @@ export class FormularioComponent {
 
   actualizarEstudiante(){
     this.servicio.actualizar(this.estudiante)
-    .subscribe(        
+    .subscribe(
       respose  => {
         this.router.navigate(['/']);
         Swal.fire('Cliente Actualizado', `Estudiante ${respose.nombres} actualizado con éxito!`, 'success');
@@ -85,7 +85,7 @@ export class FormularioComponent {
               }
     )
   }
-  
+
   cambiarBandera(){
     if(this.banderaValidaciones){
       this.banderaValidaciones=false;
@@ -93,4 +93,13 @@ export class FormularioComponent {
       this.banderaValidaciones=true;
     }
   }
+
+  agregarTelefono(){
+    this.estudiante.telefonos.push(new Telefono);
+  }
+
+  funcionEliminarTelefono(i:number){
+    this.estudiante.telefonos.splice(i, 1);
+  }
+
 }

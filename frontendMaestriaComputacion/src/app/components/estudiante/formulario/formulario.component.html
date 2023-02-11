@@ -44,21 +44,32 @@
                     name="fecha" [(ngModel)]="estudiante.fechaIngreso" #fecha="ngModel" required>
                 <label for="floatingInput">Fecha</label>
             </div>
-            <div class="form-floating m-3">
-                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="idTelefono"
-                    name="idTelefono" [(ngModel)]="telefono.id" #idTelefono="ngModel" required>
-                <label for="floatingInput">idTelefono</label>
-            </div>
-            <div class="form-floating m-3">
-                <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="Tipo" name="tipo"
+
+            <div *ngFor="let telefono of estudiante.telefonos; let i=index">
+                <!-- <div class="form-floating m-3">
+                    <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="idTelefono"
+                        name="idTelefono" [(ngModel)]="telefono.id" #idTelefono="ngModel" required>
+                    <label for="floatingInput">idTelefono</label>
+                </div> -->
+                <p>Telefonos : {{i + 1}}  <button type="submit" class="btn btn-outline-danger"
+                    (click)="funcionEliminarTelefono(i)">Eliminar</button></p>
+                <div class="form-floating m-3">
+                    <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="Tipo" name="tipo-{{i}}"
                     [(ngModel)]="telefono.tipo" #tipoTelefono="ngModel" required>
-                <label for="floatingInput">tipo telefono</label>
+                    <label for="floatingInput">tipo telefono</label>
+                    </div>
+
+                    <div class="form-floating m-3">
+                        <input type="number" class="form-control text-bg-dark" id="floatingInput"
+                        placeholder="numero telefonico" name="numerotel-{{i}}" [(ngModel)]="telefono.numero" #numeroTel="ngModel"
+                        required>
+                        <label for="floatingInput">Numero telefonico</label>
+                    </div>
             </div>
-            <div class="form-floating m-3">
-                <input type="number" class="form-control text-bg-dark" id="floatingInput"
-                    placeholder="numero telefonico" name="numerotel" [(ngModel)]="telefono.numero" #numeroTel="ngModel"
-                    required>
-                <label for="floatingInput">Numero telefonico</label>
+            <div class="col text-center">
+                <button type="submit" class="btn btn-outline-success"
+                    (click)="agregarTelefono()">Agregar otro letefono</button>
+                <!--[disabled]="!clienteForm.form.valid"-->
             </div>
             <div class="form-floating m-3">
                 <input type="text" class="form-control text-bg-dark" id="floatingInput" placeholder="direccion"

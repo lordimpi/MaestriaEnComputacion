@@ -10,4 +10,9 @@ export class Estudiante{
     fechaIngreso!: string;
     telefonos!: Telefono[];
     objDireccion!: Direccion;
+
+    constructor() {
+      this.telefonos = [new Telefono()];
+  }
+
 }
