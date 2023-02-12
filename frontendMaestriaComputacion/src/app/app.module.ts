@@ -15,8 +15,14 @@ import { AsignaturaComponent } from './components/asignatura/asignatura/asignatu
 import { CursoComponent } from './components/curso/curso/curso.component';
 import { DocenteComponent } from './components/docente/docente/docente.component';
 import { FormularioComponent } from './components/estudiante/formulario/formulario.component';
+import { CrearComponent } from './components/asignatura/asignatura/pages/crear/crear.component';
+import { TabViewModule } from 'primeng/tabview';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { ListarComponent } from './components/asignatura/asignatura/pages/listar/listar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {DialogModule} from 'primeng/dialog';
 import { QueriesComponent } from './components/queries/queries.component';
 import { BuscarDocenteComponent } from './components/queries/buscar-docente/buscar-docente.component';
 import { BuscarEstudiantePatronComponent } from './components/queries/buscar-estudiante-patron/buscar-estudiante-patron.component';
@@ -25,7 +31,24 @@ import { BuscarAsignaturaPorNombreComponent } from './components/queries/buscar-
 import { BuscarEmailComponent } from './components/queries/buscar-email/buscar-email.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, EstudianteComponent, AsignaturaComponent, CursoComponent, DocenteComponent, FormularioComponent, QueriesComponent, BuscarDocenteComponent, BuscarEstudiantePatronComponent, BuscarEstudianteNumIdentificacionComponent, BuscarAsignaturaPorNombreComponent, BuscarEmailComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    EstudianteComponent,
+    AsignaturaComponent,
+    CursoComponent,
+    DocenteComponent,
+    FormularioComponent,
+    CrearComponent,
+    ListarComponent,
+    QueriesComponent,
+    BuscarDocenteComponent,
+    BuscarEstudiantePatronComponent,
+    BuscarEstudianteNumIdentificacionComponent,
+    BuscarAsignaturaPorNombreComponent,
+    BuscarEmailComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +57,11 @@ import { BuscarEmailComponent } from './components/queries/buscar-email/buscar-e
     BrowserAnimationsModule,
     HttpClientModule,
     TabMenuModule,
+    TabViewModule,
+    ToggleButtonModule,
+    TableModule,
+    ButtonModule,
+    DialogModule,
     NgbModule,
     DialogModule,
   ],
